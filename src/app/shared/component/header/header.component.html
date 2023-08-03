@@ -1,0 +1,399 @@
+<header class="stick stick-header">
+  <nav class="nav-bar">
+    <div class="container">
+      <div class="icon-text">
+        <a href="#" title="Gumtree" class="icon-text1">
+          <div class="logo-text"><span>Claxified</span></div>
+        </a>
+      </div>
+      <div class="css-1pr0bng em7g81m0">
+        <div class="search-bar-container">
+          <form action="/search">
+            <div class="search-bar">
+              <div class="inputs-wrapper">
+                <div class="keyword-search-container">
+                  <div class="keyword-search-field">
+                    <div class="form-element form-element--input type-ahead">
+                      <div class="form-element form-element--input">
+                        <input
+                          aria-label="Type search query"
+                          placeholder="eg. BMW 3 series, 3 seater sofa, lawnmower, dining table"
+                          maxlength="50"
+                          autocomplete="off"
+                          class="input input-text"
+                          type="text"
+                          id="q"
+                          name="q"
+                          value=""
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <label
+                  class="search-location-label"
+                  for="header-search-location"
+                >
+                  <div class="dividing-line"></div>
+                </label>
+                <div class="location-container">
+                  <div class="form-element form-element--input type-ahead">
+                    <div class="form-element form-element--input">
+                      <input
+                        aria-label="Location"
+                        maxlength="50"
+                        placeholder="Add your postcode or location"
+                        autocomplete="off"
+                        class="input input-text"
+                        type="text"
+                        id="header-search-location"
+                        name="search_location"
+                        value=""
+                      />
+                    </div>
+                  </div>
+                  <button
+                    class="button button--primary search-button"
+                    rel="noopener noreferrer"
+                    type="submit"
+                  >
+                    <span class="material-icons">search</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <mat-menu #beforeMenu="matMenu" xPosition="before">
+          <button mat-menu-item>
+            <img [src]="imageUrl" alt="" class="img_stl" />
+            <div class="mt-10">
+              <p class="mt-0">{{ userData?.firstName || "" }}</p>
+              <a routerLink="/user/account/personal">Go to profile</a>
+            </div>
+          </button>
+          <hr class="profile-hr" />
+          <button
+            mat-menu-item
+            routerLink="/user/account/myadds"
+            class="button-item"
+          >
+            <span class="material-icons"> upload_file </span>
+            <span>My ads</span>
+          </button>
+          <button mat-menu-item class="button-item">
+            <span class="material-icons"> bookmark_border </span>
+            <span>Saved</span>
+          </button>
+          <button mat-menu-item class="button-item">
+            <span class="material-icons"> chat_bubble_outline </span>
+            <span>Chats</span>
+          </button>
+          <hr class="profile-hr" />
+          <button mat-menu-item routerLink="/user/account" class="button-item">
+            <span class="material-icons">settings</span>
+            <span>Account</span>
+          </button>
+          <hr class="profile-hr" />
+          <button mat-menu-item (click)="logout()" class="button-item">
+            <span class="material-icons">logout</span>
+            <span>Log Out</span>
+          </button>
+        </mat-menu>
+        <div class="pull-right header-actions">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="login profile_i" *ngIf="isUserLogedIn">
+              <img [src]="imageUrl" alt="" class="img_stl" />
+              <button
+                class="arrow"
+                mat-button
+                [matMenuTriggerFor]="beforeMenu"
+                (click)="toggleExpandIcons()"
+              >
+                <mat-icon class="expand" *ngIf="!expandIconVisible"
+                  >expand_less</mat-icon
+                >
+                <mat-icon
+                  class="expand"
+                  *ngIf="expandIconVisible"
+                  class="expand"
+                  >expand_more</mat-icon
+                >
+              </button>
+            </li>
+            <li class="login register" *ngIf="!isUserLogedIn">
+              <a (click)="openSignUpModal()">Register</a>
+            </li>
+            <li class="login" *ngIf="!isUserLogedIn">
+              <a (click)="openLoginModal()">Login</a>
+            </li>
+            <li class="neon__button">
+              <a (click)="postAdd()">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                Post Free Add
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <nav class="navbar navbar-inverse">
+    <div class="second-nav">
+      <ul class="nav navbar-nav no-pointer-nav">
+        <li class="dropdown link-item auto-pointer-events">
+          <a>Car & Vehicles</a>
+          <ul class="dropdown-menu">
+            <li>
+              <a
+                [routerLink]="'/Vehicles/view-posts'"
+                [queryParams]="{ type: 'Vehicle', sub: vehicleTypes.Car }"
+                >Cars</a
+              >
+            </li>
+            <li>
+              <a
+                [routerLink]="'/Vehicles/view-posts'"
+                [queryParams]="{ type: 'Vehicle', sub: vehicleTypes.Bike }"
+                >Bikes</a
+              >
+            </li>
+            <li>
+              <a
+                [routerLink]="'/Vehicles/view-posts'"
+                [queryParams]="{ type: 'Vehicle', sub: vehicleTypes.Scooty }"
+                >Scooty</a
+              >
+            </li>
+            <li>
+              <a
+                [routerLink]="'/Vehicles/view-posts'"
+                [queryParams]="{ type: 'Vehicle', sub: vehicleTypes.Bicycle }"
+                >Bicycle</a
+              >
+            </li>
+            <li>
+              <a
+                [routerLink]="'/Vehicles/view-posts'"
+                [queryParams]="{
+                  type: 'Vehicle',
+                  sub: vehicleTypes.SpareParts
+                }"
+                >Spare parts</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown link-item auto-pointer-events">
+          <a>Gadgets</a>
+          <ul class="dropdown-menu">
+            <li>
+              <a
+                [routerLink]="'/Gadgets/view-posts'"
+                [queryParams]="{ type: 'Gadget', sub: gadgetsTypes.Mobiles }"
+                >Mobiles</a
+              >
+            </li>
+            <li>
+              <a
+                [routerLink]="'/Gadgets/view-posts'"
+                [queryParams]="{ type: 'Gadget', sub: gadgetsTypes.Tablets }"
+                >Tablets</a
+              >
+            </li>
+            <li>
+              <a
+                [routerLink]="'/Gadgets/view-posts'"
+                [queryParams]="{
+                  type: 'Gadget',
+                  sub: gadgetsTypes.Accessories
+                }"
+                >Accessories</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown auto-pointer-events">
+          <a class="dropdown-toggle">Properties</a>
+          <ul class="dropdown-menu">
+            <li><a>For Sale: Houses & Apartments</a></li>
+            <li><a>For Rent: Houses & Apartments</a></li>
+            <li><a>Lands & Plot</a></li>
+            <li><a>For Rent: Shop & Offices</a></li>
+            <li><a>For Sale: Shops & Offices</a></li>
+            <li><a>PG & Guest Houses</a></li>
+          </ul>
+        </li>
+        <li class="dropdown auto-pointer-events">
+          <a class="dropdown-toggle">Jobs</a>
+          <ul class="dropdown-menu">
+            <li><a>Data Entry & Back Office</a></li>
+            <li><a>Sales & Marketting</a></li>
+            <li><a>BPO & Telecaller</a></li>
+            <li><a>Driver</a></li>
+            <li><a>Office Assistant</a></li>
+            <li><a>Delivery & Collection</a></li>
+            <li><a>Teacher</a></li>
+            <li><a>Cook</a></li>
+            <li><a>Receptionist & Front Office</a></li>
+            <li><a>Operator & Technician</a></li>
+            <li><a>IT & Software</a></li>
+            <li><a>Hotel & Travel</a></li>
+            <li><a>Accountant</a></li>
+            <li><a>Designer</a></li>
+            <li><a>Other Jobs</a></li>
+          </ul>
+        </li>
+        <li class="dropdown dropdown link-item auto-pointer-events">
+          <a>Electronics & Appliances</a>
+          <ul class="dropdown-menu">
+            <li>
+              <a
+                [routerLink]="'/Electronics & Appliances/view-posts'"
+                [queryParams]="{
+                  type: 'Appliances',
+                  sub: ElectronicAppliancesTypes.TV
+                }"
+                >TV</a
+              >
+            </li>
+            <li>
+              <a
+                [routerLink]="'/Electronics & Appliances/view-posts'"
+                [queryParams]="{
+                  type: 'Appliances',
+                  sub: ElectronicAppliancesTypes.Kitchen
+                }"
+                >Kitchen</a
+              >
+            </li>
+            <li>
+              <a
+                [routerLink]="'/Electronics & Appliances/view-posts'"
+                [queryParams]="{
+                  type: 'Appliances',
+                  sub: ElectronicAppliancesTypes.Computer
+                }"
+                >Computer & Laptop</a
+              >
+            </li>
+            <li>
+              <a
+                [routerLink]="'/Electronics & Appliances/view-posts'"
+                [queryParams]="{
+                  type: 'Appliances',
+                  sub: ElectronicAppliancesTypes.Camera
+                }"
+                >Camera & Lenses</a
+              >
+            </li>
+            <li>
+              <a
+                [routerLink]="'/Electronics & Appliances/view-posts'"
+                [queryParams]="{
+                  type: 'Appliances',
+                  sub: ElectronicAppliancesTypes.GamesEntertainment
+                }"
+                >Games & Entertainment</a
+              >
+            </li>
+            <li>
+              <a
+                [routerLink]="'/Electronics & Appliances/view-posts'"
+                [queryParams]="{
+                  type: 'Appliances',
+                  sub: ElectronicAppliancesTypes.Refrigrator
+                }"
+                >Refrigrator</a
+              >
+            </li>
+            <li>
+              <a
+                [routerLink]="'/Electronics & Appliances/view-posts'"
+                [queryParams]="{
+                  type: 'Appliances',
+                  sub: ElectronicAppliancesTypes.ComputerAccessories
+                }"
+                >Computer Accessories</a
+              >
+            </li>
+            <li>
+              <a
+                [routerLink]="'/Electronics & Appliances/view-posts'"
+                [queryParams]="{
+                  type: 'Appliances',
+                  sub: ElectronicAppliancesTypes.AC
+                }"
+                >AC</a
+              >
+            </li>
+            <li>
+              <a
+                [routerLink]="'/Electronics & Appliances/view-posts'"
+                [queryParams]="{
+                  type: 'Appliances',
+                  sub: ElectronicAppliancesTypes.WashingMachine
+                }"
+                >Washing Machine</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown auto-pointer-events">
+          <a class="dropdown-toggle">Furniture & Household</a>
+          <ul class="dropdown-menu">
+            <li><a>Sofa & Dining</a></li>
+            <li><a>Beds</a></li>
+            <li><a>Kids Furniture</a></li>
+            <li><a>Other Household items</a></li>
+          </ul>
+        </li>
+        <li class="dropdown auto-pointer-events">
+          <a class="dropdown-toggle">Books</a>
+          <ul class="dropdown-menu">
+            <li><a>Books</a></li>
+          </ul>
+        </li>
+        <li class="dropdown auto-pointer-events">
+          <a class="dropdown-toggle">Sports & Hobbies</a>
+          <ul class="dropdown-menu">
+            <li><a>Gym & Fitness</a></li>
+            <li><a>Musical Instruments</a></li>
+            <li><a>Sports Equipment</a></li>
+            <li><a>Other Hobbies</a></li>
+          </ul>
+        </li>
+        <li class="dropdown auto-pointer-events">
+          <a class="dropdown-toggle">Pets</a>
+          <ul class="dropdown-menu">
+            <li><a>Fishes & Aquarium</a></li>
+            <li><a>Pet Food & Accessories</a></li>
+            <li><a>Dogs</a></li>
+            <li><a>Other Pets</a></li>
+          </ul>
+        </li>
+        <li class="dropdown auto-pointer-events">
+          <a class="dropdown-toggle">Fashion</a>
+          <ul class="dropdown-menu">
+            <li><a>Men</a></li>
+            <li><a>Women</a></li>
+            <li><a>Kids</a></li>
+          </ul>
+        </li>
+        <li class="dropdown auto-pointer-events">
+          <a class="dropdown-toggle">Services</a>
+          <ul class="dropdown-menu">
+            <li><a>Electronic & Computer</a></li>
+            <li><a>Education & Classess</a></li>
+            <li><a>Driver & Taxi</a></li>
+            <li><a>Healthy & Beauty</a></li>
+            <li><a>Other Services</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
