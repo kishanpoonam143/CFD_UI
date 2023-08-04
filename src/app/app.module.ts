@@ -11,16 +11,12 @@ import { MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 import { UserModule } from './modules/user/user.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './modules/auth/interceptor/JwtInterceptor';
-import { FooterComponent } from './footer/footer.component';
-import { LocationsComponent } from './locations/locations.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     PostMenuComponent,
-    FooterComponent,
-    LocationsComponent,
   ],
   imports: [
     BrowserModule,

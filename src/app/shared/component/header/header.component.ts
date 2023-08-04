@@ -7,6 +7,7 @@ import { SignupComponent } from '../../../modules/user/component/signup/signup.c
 import { GadgetType } from '../../enum/GadgetType';
 import { VehicleType } from '../../enum/VehicleType';
 import { ElectronicApplianceType } from '../../enum/ElectronicApplianceType';
+import { FurnitureType } from '../../enum/FurnitureType';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -18,6 +19,7 @@ export class HeaderComponent implements OnInit {
   vehicleTypes = VehicleType;
   gadgetsTypes = GadgetType;
   ElectronicAppliancesTypes = ElectronicApplianceType;
+  furnitureTypes = FurnitureType;
   isUserLogedIn: boolean = false;
   userData: any;
   imageUrl: string = "https://icon-library.com/images/default-profile-icon/default-profile-icon-24.jpg";
