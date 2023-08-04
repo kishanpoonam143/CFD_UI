@@ -1,14 +1,14 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
+import { FurnitureService } from '../../service/furniture.service';
 import { ActivatedRoute } from '@angular/router';
 import { CommonService } from 'src/app/shared/service/common.service';
-import { ApplianceService } from '../../service/appliance.service';
 
 @Component({
-  selector: 'app-appliance-posts',
-  templateUrl: './appliance-posts.component.html',
-  styleUrls: ['./appliance-posts.component.css']
+  selector: 'app-furniture-posts',
+  templateUrl: './furniture-posts.component.html',
+  styleUrls: ['./furniture-posts.component.css']
 })
-export class AppliancePostsComponent {
+export class FurniturePostsComponent {
 
   category: string = "";
   subCategoryId: Number = 0;
@@ -17,13 +17,13 @@ export class AppliancePostsComponent {
   subscription: any;
   actualCards: any;
   constructor(private route: ActivatedRoute, private commonService: CommonService, private cdr: ChangeDetectorRef,
-    private electronicApplianceService: ApplianceService) { }
+    private furnitureService: FurnitureService) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.isLoading = true;
-      this.category = params['type'].replaceAll("%20"," ");
-      this.subCategoryId = Number(params['sub'].replaceAll("%20"," "));
+      this.category = params['type'];
+      this.subCategoryId = Number(params['sub']);
       this.getPosts();
     });
     this.subscription = this.commonService.getData().subscribe((data: any) => {
@@ -33,7 +33,7 @@ export class AppliancePostsComponent {
   }
   getPosts() {
     this.cards = [];
-    this.electronicApplianceService.getAllElectronicAppliancePosts().subscribe((data: any) => {
+    this.furnitureService.getAllFurniturePosts().subscribe((data: any) => {
       this.actualCards = data;
       this.cards = this.actualCards.filter((card: any) => card.subCategoryId == this.subCategoryId);
       this.isLoading = false;

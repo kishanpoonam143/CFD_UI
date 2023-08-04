@@ -14,12 +14,15 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { HeaderComponent } from './component/header/header.component';
 import { PostCardComponent } from './component/post-card/post-card.component';
 import { RouterModule } from '@angular/router';
-
+import { FooterComponent } from './component/footer/footer.component';
+import { LocationsComponent } from './component/locations/locations.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    PostCardComponent
+    PostCardComponent,
+    FooterComponent,
+    LocationsComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +41,9 @@ import { RouterModule } from '@angular/router';
   ],
   exports : [
     PostCardComponent,
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent,
+    LocationsComponent
   ]
 })
 export class SharedModule { }

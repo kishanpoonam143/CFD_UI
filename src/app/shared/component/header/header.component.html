@@ -342,14 +342,18 @@
             </li>
           </ul>
         </li>
-        <li class="dropdown auto-pointer-events">
-          <a class="dropdown-toggle">Furniture & Household</a>
-          <ul class="dropdown-menu">
-            <li><a>Sofa & Dining</a></li>
-            <li><a>Beds</a></li>
-            <li><a>Kids Furniture</a></li>
-            <li><a>Other Household items</a></li>
-          </ul>
+        <li class="dropdown dropdown link-item auto-pointer-events">
+          <a>Furniture & Household</a>
+            <ul class="dropdown-menu">
+              <li><a [routerLink]="'/Furniture/view-posts'"
+                [queryParams]="{ type: 'Furniture', sub: furnitureTypes.SofaAndDining }">Sofa & Dining</a></li>
+              <li><a [routerLink]="'/Furniture/view-posts'"
+                [queryParams]="{ type: 'Furniture', sub: furnitureTypes.Beds }">Beds</a></li>
+              <li><a [routerLink]="'/Furniture/view-posts'"
+                [queryParams]="{ type: 'Furniture', sub: furnitureTypes.KidsFurniture }">Kids Furniture</a></li>
+              <li><a [routerLink]="'/Furniture/view-posts'"
+                [queryParams]="{ type: 'Furniture', sub: furnitureTypes.OtherHouseholdItems }">Other Household items</a></li>
+            </ul>
         </li>
         <li class="dropdown auto-pointer-events">
           <a class="dropdown-toggle">Books</a>
