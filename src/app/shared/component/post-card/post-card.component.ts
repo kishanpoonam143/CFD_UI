@@ -21,7 +21,7 @@ export class PostCardComponent implements OnInit {
     totalPages = 0;
     paginatedCards: any[] = [];
     mainCategories: any = [];
-    mainCategory: any ;
+    mainCategory: any;
     constructor(private router: Router, private commonService: CommonService) { }
 
     ngOnInit() {
@@ -57,6 +57,9 @@ export class PostCardComponent implements OnInit {
     }
     navigateToDetails(data: any) {
         this.getMainCategoryName(data);
+        setTimeout(() => {
+            this.navigateToCardDetails(data);
+        });
     }
     getMainCategories() {
         this.commonService.getAllCategory().subscribe((data: any) => {
@@ -66,12 +69,30 @@ export class PostCardComponent implements OnInit {
     onLinkRightClick(data: any) {
         this.getMainCategoryName(data);
     }
-    getMainCategoryName(data:any){
+    getMainCategoryName(data: any) {
         for (var i = 0; i < this.mainCategories.length; i++) {
-            if (this.mainCategories[i].id == data.categoryId){
+            if (this.mainCategories[i].id == data.categoryId) {
                 this.mainCategory = this.mainCategories[i].categoryName;
                 break;
             }
         }
+    }
+    getCardImageURL(card: any): string {
+        if (card.gadgetImageList && card.gadgetImageList[0]?.imageURL) {
+            return card.gadgetImageList[0]?.imageURL;
+        } else if (card.vehicleImageList && card.vehicleImageList[0]?.imageURL) {
+            return card.vehicleImageList[0]?.imageURL;
+        } else if (card.electronicApplianceImageList && card.electronicApplianceImageList[0]?.imageURL) {
+            return card.electronicApplianceImageList[0]?.imageURL;
+        } else if (card.furnitureImageList && card.furnitureImageList[0]?.imageURL) {
+            return card.furnitureImageList[0]?.imageURL;
+        }
+        else {
+            return '../../../assets/image_not_available.png';
+        }
+    }
+    navigateToCardDetails(data: any) {
+        const route = '/' + this.mainCategory + '/post-details/' + data.tableRefGuid;
+        this.router.navigate([route]);
     }
 }
