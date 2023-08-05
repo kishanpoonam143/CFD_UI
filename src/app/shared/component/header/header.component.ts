@@ -8,6 +8,7 @@ import { GadgetType } from '../../enum/GadgetType';
 import { VehicleType } from '../../enum/VehicleType';
 import { ElectronicApplianceType } from '../../enum/ElectronicApplianceType';
 import { FurnitureType } from '../../enum/FurnitureType';
+import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -25,6 +26,18 @@ export class HeaderComponent implements OnInit {
   imageUrl: string = "https://icon-library.com/images/default-profile-icon/default-profile-icon-24.jpg";
   dialogRef: MatDialogRef<any> | null = null;
   constructor(private dialog: MatDialog, private router: Router, private userService: UserService) { }
+
+  searchQuery: string = '';
+
+  locationSearchQuery: string = '';
+
+  clearSearchText(): void {
+    this.searchQuery = '';
+  }
+
+  clearLocationSearchText(): void {
+    this.locationSearchQuery = ''; 
+  }
 
   ngOnInit() {
     console.log(VehicleType.Car);

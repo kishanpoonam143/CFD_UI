@@ -3,7 +3,9 @@
     <div class="container">
       <div class="icon-text">
         <a href="#" title="Gumtree" class="icon-text1">
-          <div class="logo-text"><span>Claxified</span></div>
+          <div class="logo-img">
+            <img src="../../../../assets/logo.jpg" alt="Logo" />
+          </div>
         </a>
       </div>
       <div class="css-1pr0bng em7g81m0">
@@ -25,7 +27,13 @@
                           id="q"
                           name="q"
                           value=""
+                          [(ngModel)]="searchQuery"
                         />
+                        <span
+                          class="material-icons cross-icon"
+                          (click)="clearSearchText()"
+                          >clear</span
+                        >
                       </div>
                     </div>
                   </div>
@@ -49,7 +57,13 @@
                         id="header-search-location"
                         name="search_location"
                         value=""
+                        [(ngModel)]="locationSearchQuery"
                       />
+                      <span
+                        class="material-icons cross-icon"
+                        (click)="clearLocationSearchText()"
+                        >clear</span
+                      >
                     </div>
                   </div>
                   <button
@@ -144,8 +158,11 @@
   <nav class="navbar navbar-inverse">
     <div class="second-nav">
       <ul class="nav navbar-nav no-pointer-nav">
-        <li class="dropdown link-item auto-pointer-events">
-          <a>Car & Vehicles</a>
+        <li class="dropdown auto-pointer-events">
+          <div class="li-item link-item">
+            <span class="material-icons-outlined"> directions_car_filled </span>
+            <a>Car & Vehicles</a>
+          </div>
           <ul class="dropdown-menu">
             <li>
               <a
@@ -187,8 +204,11 @@
             </li>
           </ul>
         </li>
-        <li class="dropdown link-item auto-pointer-events">
-          <a>Gadgets</a>
+        <li class="dropdown auto-pointer-events">
+          <div class="li-item link-item">
+            <span class="material-icons"> devices_other </span>
+            <a>Gadgets</a>
+          </div>
           <ul class="dropdown-menu">
             <li>
               <a
@@ -217,7 +237,10 @@
           </ul>
         </li>
         <li class="dropdown auto-pointer-events">
-          <a class="dropdown-toggle">Properties</a>
+          <div class="li-item">
+            <span class="material-icons-outlined"> maps_home_work </span>
+            <a class="dropdown-toggle">Properties</a>
+          </div>
           <ul class="dropdown-menu">
             <li><a>For Sale: Houses & Apartments</a></li>
             <li><a>For Rent: Houses & Apartments</a></li>
@@ -228,7 +251,10 @@
           </ul>
         </li>
         <li class="dropdown auto-pointer-events">
-          <a class="dropdown-toggle">Jobs</a>
+          <div class="li-item">
+            <span class="material-icons"> work_outline </span>
+            <a class="dropdown-toggle">Jobs</a>
+          </div>
           <ul class="dropdown-menu">
             <li><a>Data Entry & Back Office</a></li>
             <li><a>Sales & Marketting</a></li>
@@ -247,8 +273,11 @@
             <li><a>Other Jobs</a></li>
           </ul>
         </li>
-        <li class="dropdown dropdown link-item auto-pointer-events">
-          <a>Electronics & Appliances</a>
+        <li class="dropdown auto-pointer-events">
+          <div class="li-item link-item">
+            <span class="material-icons"> tv</span>
+            <a class="dropdown-toggle">Electronics & Appliances</a>
+          </div>
           <ul class="dropdown-menu">
             <li>
               <a
@@ -342,27 +371,65 @@
             </li>
           </ul>
         </li>
-        <li class="dropdown dropdown link-item auto-pointer-events">
-          <a>Furniture & Household</a>
-            <ul class="dropdown-menu">
-              <li><a [routerLink]="'/Furniture/view-posts'"
-                [queryParams]="{ type: 'Furniture', sub: furnitureTypes.SofaAndDining }">Sofa & Dining</a></li>
-              <li><a [routerLink]="'/Furniture/view-posts'"
-                [queryParams]="{ type: 'Furniture', sub: furnitureTypes.Beds }">Beds</a></li>
-              <li><a [routerLink]="'/Furniture/view-posts'"
-                [queryParams]="{ type: 'Furniture', sub: furnitureTypes.KidsFurniture }">Kids Furniture</a></li>
-              <li><a [routerLink]="'/Furniture/view-posts'"
-                [queryParams]="{ type: 'Furniture', sub: furnitureTypes.OtherHouseholdItems }">Other Household items</a></li>
-            </ul>
+        <li class="dropdown dropdown auto-pointer-events">
+          <div class="li-item link-item">
+            <span class="material-icons"> bed </span>
+            <a>Furniture & Household</a>
+          </div>
+          <ul class="dropdown-menu">
+            <li>
+              <a
+                [routerLink]="'/Furniture/view-posts'"
+                [queryParams]="{
+                  type: 'Furniture',
+                  sub: furnitureTypes.SofaAndDining
+                }"
+                >Sofa & Dining</a
+              >
+            </li>
+            <li>
+              <a
+                [routerLink]="'/Furniture/view-posts'"
+                [queryParams]="{ type: 'Furniture', sub: furnitureTypes.Beds }"
+                >Beds</a
+              >
+            </li>
+            <li>
+              <a
+                [routerLink]="'/Furniture/view-posts'"
+                [queryParams]="{
+                  type: 'Furniture',
+                  sub: furnitureTypes.KidsFurniture
+                }"
+                >Kids Furniture</a
+              >
+            </li>
+            <li>
+              <a
+                [routerLink]="'/Furniture/view-posts'"
+                [queryParams]="{
+                  type: 'Furniture',
+                  sub: furnitureTypes.OtherHouseholdItems
+                }"
+                >Other Household items</a
+              >
+            </li>
+          </ul>
         </li>
         <li class="dropdown auto-pointer-events">
-          <a class="dropdown-toggle">Books</a>
+          <div class="li-item">
+            <span class="material-icons-outlined"> auto_stories </span>
+            <a class="dropdown-toggle">Books</a>
+          </div>
           <ul class="dropdown-menu">
             <li><a>Books</a></li>
           </ul>
         </li>
         <li class="dropdown auto-pointer-events">
-          <a class="dropdown-toggle">Sports & Hobbies</a>
+          <div class="li-item">
+            <span class="material-icons"> sports_soccer </span>
+            <a class="dropdown-toggle">Sports & Hobbies</a>
+          </div>
           <ul class="dropdown-menu">
             <li><a>Gym & Fitness</a></li>
             <li><a>Musical Instruments</a></li>
@@ -371,7 +438,10 @@
           </ul>
         </li>
         <li class="dropdown auto-pointer-events">
-          <a class="dropdown-toggle">Pets</a>
+          <div class="li-item">
+            <span class="material-icons-outlined"> cruelty_free</span>
+            <a class="dropdown-toggle">Pets</a>
+          </div>
           <ul class="dropdown-menu">
             <li><a>Fishes & Aquarium</a></li>
             <li><a>Pet Food & Accessories</a></li>
@@ -380,7 +450,10 @@
           </ul>
         </li>
         <li class="dropdown auto-pointer-events">
-          <a class="dropdown-toggle">Fashion</a>
+          <div class="li-item">
+            <span class="material-icons-outlined"> watch </span>
+            <a class="dropdown-toggle">Fashion</a>
+          </div>
           <ul class="dropdown-menu">
             <li><a>Men</a></li>
             <li><a>Women</a></li>
@@ -388,7 +461,10 @@
           </ul>
         </li>
         <li class="dropdown auto-pointer-events">
-          <a class="dropdown-toggle">Services</a>
+          <div class="li-item">
+            <span class="material-icons"> electrical_services </span>
+            <a class="dropdown-toggle">Services</a>
+          </div>
           <ul class="dropdown-menu">
             <li><a>Electronic & Computer</a></li>
             <li><a>Education & Classess</a></li>

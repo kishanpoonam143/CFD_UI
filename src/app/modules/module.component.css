@@ -48,6 +48,7 @@
 .h200{
     height: 200px;
 }
+
 .right_arrow{
     margin-left: 30px;
 }
@@ -75,6 +76,7 @@
 .block{
     display: block;
 }
+
 .mat-mdc-card-title {
     display: block;
     margin: 0;
@@ -104,6 +106,9 @@
     width: 25px;
     height: 25px;
     margin-top: 117px;
+}
+.w-90{
+    width: 90%;
 }
 
 /* Changes Made By Hamza */
@@ -146,3 +151,7 @@
     width: 600px;
     height: 400px;
 }
+
+.container-center {
+   padding: 0 8%;
+  }
