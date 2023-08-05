@@ -6,7 +6,7 @@ import * as moment from 'moment';
 @Component({
   selector: 'app-post-details',
   templateUrl: './post-details.component.html',
-  styleUrls: ['./post-details.component.css']
+  styleUrls: ['./post-details.component.css', '../../../module.component.css']
 })
 export class PostDetailsComponent {
 

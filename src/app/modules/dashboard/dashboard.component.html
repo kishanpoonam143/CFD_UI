@@ -1,8 +1,8 @@
 <div class="spinner__loading" *ngIf="isLoading">
-    <div>
-        <mat-spinner></mat-spinner>
-    </div>
+  <div>
+    <mat-spinner></mat-spinner>
   </div>
-  <div *ngIf="!isLoading" class="d-card">
+</div>
+<div *ngIf="!isLoading" class="d-card">
   <app-post-card [isLoading]="isLoading" [cards]="cards"></app-post-card>
-  </div>
+</div>

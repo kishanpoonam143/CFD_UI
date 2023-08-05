@@ -21,6 +21,7 @@
 
 .dropdown-menu a {
     background-color: transparent !important;
+    color: #3c3241;
 }
 
 
@@ -63,9 +64,13 @@ nav ul li:hover {
     background-color: #fff;
 }
 
+.dropdown .li-item:hover a{
+    text-decoration: none;
+}
 
-.navbar-inverse .dropdown.link-item:hover>a {
-    text-decoration: underline;
+
+.link-item:hover> a{
+    text-decoration: underline !important;
 }
 
 .navbar-nav:hover {
@@ -75,15 +80,7 @@ nav ul li:hover {
  .mat-card{
      margin: 1%;
  }
- .logo-image{
-     display: flex;
- }
- .logo-text{
-     display: flex;
-     margin-top: 10px;
-     font-size: 25px;
-     color: aliceblue;
- }
+
  .nav-bar{
      background-color: #0d475c;
      z-index: 1002;
@@ -148,7 +145,8 @@ nav ul li:hover {
  }
  .search-bar .inputs-wrapper .search-location-label .dividing-line {
      height: 23px;
-     border-right: 1px solid rgba(60,50,65,.49);
+     border-right: 1px solid #b1adb3;
+     margin-top: 5px;
  }
  .search-bar .inputs-wrapper .location-container {
      margin-top: 0;
@@ -341,6 +339,7 @@ nav ul li:hover {
 
 .neon__button:hover{
     background-color: #0d475c !important;
+    cursor: pointer;
 }
 
 .neon__button a:hover{
@@ -475,4 +474,74 @@ nav ul li:hover {
     right: 0;
     height: 50%; /* Set the desired height for the border */
     border-right: 1px solid #ddd; /* Example border style */
+}
+
+.li-item{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 15px 12px;
+}
+
+.li-item .material-icons, .li-item .material-icons-outlined{
+    color: #0d475c;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -2px;
+
+}
+
+
+.li-item a{
+    color: #3c3241;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.search-bar-container input::placeholder {
+    color: #b1adb3;
+}
+
+.form-element.form-element--input {
+    position: relative;
+}
+  
+.cross-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    display: none;
+    color: #b1adb3;
+}
+  
+.form-element.form-element--input input:not(:placeholder-shown) + .cross-icon {
+    display: block;
+}
+
+header{
+    padding-bottom: 0 !important;
+}
+
+.logo-img{
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.logo-img img{
+    object-fit: contain;
+    height: 5rem;
+    width: 10rem;
+    margin-top: 5px;
+}
+
+.logo-text{
+    display: flex;
+    margin-top: 10px;
+    font-size: 25px;
+    color: aliceblue;
 }

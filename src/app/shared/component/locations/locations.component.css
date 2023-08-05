@@ -4,7 +4,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     background-color: #fff;
-    padding: 30px 0;
+    padding-bottom: 30px;
 }
 
 .tabs::before {
@@ -13,7 +13,7 @@
     position: absolute;
     width: 80%;
     left: 10%;
-    top: 85px;
+    top: 55px;
     height: 3px;
     border-radius: 100%;
 }

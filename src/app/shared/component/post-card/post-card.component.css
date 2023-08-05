@@ -1,12 +1,12 @@
 .mat-app-background {
-    padding: 20px 0;
+    padding: 30px;
     display: flex;
     height: 100%;
-    width: 97%;
-    /* justify-content: center;  Changes made by Hamza */
+    min-width: 100% !important;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 15px;
-    padding-left: 20px;
+    /* margin-top: -10px !important; */
 }
 
 .card-image {
