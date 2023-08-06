@@ -11,6 +11,7 @@ export class PostMenuComponent {
   mainCategories: any = [];
   subCategories: any = [];
   selectedCategory : any ;
+  showSubcategories: boolean = false;
   constructor(private commonService : CommonService) { }
 
   ngOnInit() {
@@ -22,6 +23,14 @@ export class PostMenuComponent {
       this.subCategories = data;
     });
   }
+
+  hideSubCategories() {
+    // When leaving the main category, hide the subcategories
+    this.subCategories = [];
+    this.showSubcategories = false; // Set to false to hide the subcategories
+    this.selectedCategory = null;
+  }
+
   getAllCategory(){
     this.commonService.getAllCategory().subscribe((data:any)=>{
       this.mainCategories = data;

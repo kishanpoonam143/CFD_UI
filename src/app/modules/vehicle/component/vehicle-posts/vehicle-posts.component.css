@@ -3,7 +3,6 @@
 }
 
 .cards {
-  margin-left: 45px;
   width: 100%;
 }
 
@@ -18,6 +17,18 @@
   margin-left: 10px;
 }
 
+.mr-20 {
+  margin-right: 20px;
+}
+
 .w-30 {
   width: 30%;
+}
+
+.bg{
+  background-color: #fafafa;
+}
+
+.mat-app-background{
+  padding-left: 40px !important;
 }
