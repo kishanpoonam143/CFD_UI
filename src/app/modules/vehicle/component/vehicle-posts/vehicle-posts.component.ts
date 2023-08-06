@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonService } from 'src/app/shared/service/common.service';
 import { VehicleService } from '../../service/vehicle.service';
@@ -6,7 +6,8 @@ import { VehicleService } from '../../service/vehicle.service';
 @Component({
   selector: 'app-vehicle-posts',
   templateUrl: './vehicle-posts.component.html',
-  styleUrls: ['./vehicle-posts.component.css']
+  styleUrls: ['./vehicle-posts.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class VehiclePostsComponent {
 

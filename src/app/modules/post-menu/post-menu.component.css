@@ -15,7 +15,7 @@
     font-size: 24px;
     font-weight: 700;
     text-transform: uppercase;
-    margin-top: 70px;
+    margin-top: 80px;
 }
 
 .head {
@@ -87,17 +87,30 @@
 .sub-cat {
     position: absolute;
     right: 0 !important;
-    border-right: none;
+    border-right: none !important;
 }
 
-.cat-name:hover,
+.sub-cat li{
+    border-right: none !important;
+}
+
+/* .cat-name:hover,
 .cat-name:active {
     color: white;
     background-color: #09ca09f5;
     border: #09ca09f5;
-}
+} */
 .active{
-    color: white;
-    background-color: #09ca09f5;
-    border: #09ca09f5;
+    color: #222;
+    background-color: #f1f1f1;
 }
+
+/* Apply styles when hovering on the li element inside the bord div */
+.bord li.cat-name:hover {
+    background-color: #f1f1f1;
+}
+
+.bord li.cat-name:hover span{
+    color: #222 !important;
+}
+  
