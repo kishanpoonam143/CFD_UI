@@ -318,3 +318,55 @@
 .custom-link:hover {
     text-decoration: none;
 }
+
+.back-to-top-btn {
+    position: fixed;
+    bottom: 0;
+    left: 690px;
+    top: 130px;
+    height: 45px;
+    width: 140px;
+    background-color: #f1f1f1;
+    color: #222;
+    border: none;
+    padding: 10px 3px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    z-index: 1100;
+    font-weight: 500;
+    font-size: 16px;
+  }
+
+  /* .back-to-top-btn:hover{
+    border: 1px solid #222;
+  }
+   */
+  .back-to-top-btn.show {
+    display: flex;
+  }
+
+  .load-more-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    width: 90%;
+  }
+  
+  .load-more-btn {
+    background-color: #f1f1f1;
+    color: #222;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-weight: 500;
+    font-size: 16px;
+  }

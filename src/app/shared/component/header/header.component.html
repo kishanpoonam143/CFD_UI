@@ -429,7 +429,7 @@
           </ul>
         </li>
         <li class="dropdown auto-pointer-events">
-          <div class="li-item">
+          <div class="li-item link-item">
             <span class="material-icons"> sports_soccer </span>
             <a class="dropdown-toggle">Sports & Hobbies</a>
           </div>
@@ -447,7 +447,10 @@
             <li>
               <a
                 [routerLink]="'/Sports & Hobbies/view-posts'"
-                [queryParams]="{ type: 'Sport', sub: sportTypes.MusicalInstruments }"
+                [queryParams]="{
+                  type: 'Sport',
+                  sub: sportTypes.MusicalInstruments
+                }"
                 >Musical Instruments</a
               >
             </li>

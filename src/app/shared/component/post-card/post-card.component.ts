@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, HostListener } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
@@ -16,18 +16,49 @@ export class PostCardComponent implements OnInit {
     currentDate: Date = new Date();
 
     // Pagination properties
-    pageSize = 20;
+    // pageSize = 20;
     currentPage = 0;
     totalPages = 0;
     paginatedCards: any[] = [];
     mainCategories: any = [];
     mainCategory: any;
+    
+    displayedCardCount: number = 16;
+
+    isScrolledDown = false;
+
+    scrollToTop() {
+        const scrollDuration = 300; // Duration of the scroll animation in milliseconds
+        const scrollStep = -window.scrollY / (scrollDuration / 15); // Divide the scroll distance into smaller steps
+    
+        const scrollAnimation = () => {
+          if (window.scrollY !== 0) {
+            window.scrollBy(0, scrollStep);
+            requestAnimationFrame(scrollAnimation); // Continue scrolling until reaching the top
+          }
+        };
+    
+        requestAnimationFrame(scrollAnimation);
+      }
+  
+    @HostListener('window:scroll', [])
+    onScroll() {
+      const scrollY = window.scrollY || document.documentElement.scrollTop;
+      this.isScrolledDown = scrollY > 0;
+    }
+  
     constructor(private router: Router, private commonService: CommonService) { }
 
     ngOnInit() {
-        this.paginatedCards = this.cards;
+        this.paginatedCards = this.cards.slice(0, this.displayedCardCount);
         this.getMainCategories();
     }
+
+    loadMoreCards() {
+        this.displayedCardCount += 16; // Increase the count for the next set of cards
+        this.paginatedCards = this.cards.slice(0, this.displayedCardCount);
+      }
+
     formatDate(date: any): any {
         const inputDate: Date = new Date(date);
         const daysAgo = moment(this.currentDate).diff(inputDate, 'days');
@@ -44,17 +75,17 @@ export class PostCardComponent implements OnInit {
             return moment(inputDate).format('MMM DD');
         }
     }
-    onPageChange(event: PageEvent): void {
-        this.currentPage = event.pageIndex;
-        this.calculatePagination();
-    }
-    calculatePagination() {
-        this.totalPages = Math.ceil(this.cards.length / this.pageSize);
-        this.paginatedCards = this.cards.slice(
-            this.currentPage * this.pageSize,
-            (this.currentPage + 1) * this.pageSize
-        );
-    }
+    // onPageChange(event: PageEvent): void {
+    //     this.currentPage = event.pageIndex;
+    //     this.calculatePagination();
+    // }
+    // calculatePagination() {
+    //     this.totalPages = Math.ceil(this.cards.length / this.pageSize);
+    //     this.paginatedCards = this.cards.slice(
+    //         this.currentPage * this.pageSize,
+    //         (this.currentPage + 1) * this.pageSize
+    //     );
+    // }
     getMainCategories() {
         this.commonService.getAllCategory().subscribe((data: any) => {
             this.mainCategories = data;
