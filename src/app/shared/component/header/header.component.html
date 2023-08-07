@@ -5,7 +5,9 @@
         <a href="#" title="Gumtree" class="icon-text1">
           <div class="logo-img">
             <!-- <img src="../../../../assets/logo.jpg" alt="Logo" /> -->
-            <div class="logo-text">&nbsp;&nbsp;&nbsp;&nbsp;<span>CLAXIFIED</span></div>
+            <div class="logo-text">
+              <span>CLAXIFIED</span>
+            </div>
           </div>
         </a>
       </div>
@@ -161,6 +163,38 @@
       <ul class="nav navbar-nav no-pointer-nav">
         <li class="dropdown auto-pointer-events">
           <div class="li-item link-item">
+            <span class="material-icons"> devices_other </span>
+            <a>Gadgets</a>
+          </div>
+          <ul class="dropdown-menu">
+            <li>
+              <a
+                [routerLink]="'/Gadgets/view-posts'"
+                [queryParams]="{ type: 'Gadget', sub: gadgetsTypes.Mobiles }"
+                >Mobiles</a
+              >
+            </li>
+            <li>
+              <a
+                [routerLink]="'/Gadgets/view-posts'"
+                [queryParams]="{ type: 'Gadget', sub: gadgetsTypes.Tablets }"
+                >Tablets</a
+              >
+            </li>
+            <li>
+              <a
+                [routerLink]="'/Gadgets/view-posts'"
+                [queryParams]="{
+                  type: 'Gadget',
+                  sub: gadgetsTypes.Accessories
+                }"
+                >Accessories</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown auto-pointer-events">
+          <div class="li-item link-item">
             <span class="material-icons-outlined"> directions_car_filled </span>
             <a>Vehicles</a>
           </div>
@@ -201,38 +235,6 @@
                   sub: vehicleTypes.SpareParts
                 }"
                 >Spare parts</a
-              >
-            </li>
-          </ul>
-        </li>
-        <li class="dropdown auto-pointer-events">
-          <div class="li-item link-item">
-            <span class="material-icons"> devices_other </span>
-            <a>Gadgets</a>
-          </div>
-          <ul class="dropdown-menu">
-            <li>
-              <a
-                [routerLink]="'/Gadgets/view-posts'"
-                [queryParams]="{ type: 'Gadget', sub: gadgetsTypes.Mobiles }"
-                >Mobiles</a
-              >
-            </li>
-            <li>
-              <a
-                [routerLink]="'/Gadgets/view-posts'"
-                [queryParams]="{ type: 'Gadget', sub: gadgetsTypes.Tablets }"
-                >Tablets</a
-              >
-            </li>
-            <li>
-              <a
-                [routerLink]="'/Gadgets/view-posts'"
-                [queryParams]="{
-                  type: 'Gadget',
-                  sub: gadgetsTypes.Accessories
-                }"
-                >Accessories</a
               >
             </li>
           </ul>
@@ -492,6 +494,17 @@
             <li><a>Men</a></li>
             <li><a>Women</a></li>
             <li><a>Kids</a></li>
+          </ul>
+        </li>
+        <li class="dropdown auto-pointer-events">
+          <div class="li-item">
+            <span class="material-icons-outlined"> favorite_border </span>
+            <a class="dropdown-toggle">Matrimonial</a>
+          </div>
+          <ul class="dropdown-menu">
+            <li><a>Men</a></li>
+            <li><a>Women</a></li>
+            <li><a>Life Partner</a></li>
           </ul>
         </li>
         <li class="dropdown auto-pointer-events">
