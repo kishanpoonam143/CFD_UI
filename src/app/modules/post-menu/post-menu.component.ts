@@ -17,10 +17,15 @@ export class PostMenuComponent {
   ngOnInit() {
     this.getAllCategory();
   }
-  showSubCategories(mainCategory:any){
+  showSubCategories(mainCategory: any) {
     this.selectedCategory = mainCategory.categoryName;
-    this.commonService.getSubCategoryByCategoryId(mainCategory.id).subscribe((data:any)=>{
+    this.commonService.getSubCategoryByCategoryId(mainCategory.id).subscribe((data: any) => {
       this.subCategories = data;
+    });
+  }
+  getAllCategory() {
+    this.commonService.getAllCategory().subscribe((data: any) => {
+      this.mainCategories = data;
     });
   }
 
@@ -29,11 +34,5 @@ export class PostMenuComponent {
     this.subCategories = [];
     this.showSubcategories = false; // Set to false to hide the subcategories
     this.selectedCategory = null;
-  }
-
-  getAllCategory(){
-    this.commonService.getAllCategory().subscribe((data:any)=>{
-      this.mainCategories = data;
-    });
   }
 }

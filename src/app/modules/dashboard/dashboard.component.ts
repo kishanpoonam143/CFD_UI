@@ -8,15 +8,15 @@ import { CommonService } from 'src/app/shared/service/common.service';
 })
 export class DashboardComponent {
 
-  constructor(private commonService : CommonService) { }
+  constructor(private commonService: CommonService) { }
 
   cards: any = [];
   currentDate: Date = new Date();
-  isLoading : Boolean = true;
+  isLoading: Boolean = true;
   ngOnInit(): void {
-      this.commonService.getAllItems().subscribe((data:any) => {
-          this.cards = data;
-          this.isLoading = false;
-      })
+    this.commonService.getAllItems().subscribe((data: any) => {
+      this.cards = data;
+      this.isLoading = false;
+    })
   }
 }

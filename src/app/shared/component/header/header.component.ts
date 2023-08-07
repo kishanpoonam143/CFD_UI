@@ -9,6 +9,7 @@ import { VehicleType } from '../../enum/VehicleType';
 import { ElectronicApplianceType } from '../../enum/ElectronicApplianceType';
 import { FurnitureType } from '../../enum/FurnitureType';
 import { MatIconModule } from '@angular/material/icon';
+import { SportType } from '../../enum/SportType';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -21,6 +22,7 @@ export class HeaderComponent implements OnInit {
   gadgetsTypes = GadgetType;
   ElectronicAppliancesTypes = ElectronicApplianceType;
   furnitureTypes = FurnitureType;
+  sportTypes = SportType;
   isUserLogedIn: boolean = false;
   userData: any;
   imageUrl: string = "https://icon-library.com/images/default-profile-icon/default-profile-icon-24.jpg";

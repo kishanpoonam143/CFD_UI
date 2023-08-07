@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { FurnitureService } from '../../service/furniture.service';
+import { SportService } from '../../service/sport.service';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
 
 @Component({
   selector: 'app-post-details',
   templateUrl: './post-details.component.html',
-  styleUrls: ['./post-details.component.css', '../../../module.component.css']
+  styleUrls: ['./post-details.component.css']
 })
 export class PostDetailsComponent {
 
@@ -26,7 +26,7 @@ export class PostDetailsComponent {
   ];
   itemsPerPage = 4;
   currentPage = 0;
-  constructor(private furnitureService: FurnitureService, private route: ActivatedRoute) { }
+  constructor(private sportService: SportService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     var tableRefGuid;
@@ -34,14 +34,14 @@ export class PostDetailsComponent {
       tableRefGuid = params.get('id');
     });
     if (tableRefGuid != null) {
-      this.getFurniturePost(tableRefGuid);
+      this.getSportPost(tableRefGuid);
     }
   }
-  getFurniturePost(guid: any) {
-    this.furnitureService.getFurniturePostByGuid(guid).subscribe((data: any) => {
+  getSportPost(guid: any) {
+    this.sportService.getSportPostByGuid(guid).subscribe((data: any) => {
       this.postDetails = data[0];
       this.isLoading = false;
-      this.imagesList = this.postDetails.furnitureImageList;
+      this.imagesList = this.postDetails.sportImageList;
     });
   }
   formatDate(date: any): any {

@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'user', loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule),canActivate: [AuthGuard] },
   { path: 'Electronics & Appliances', loadChildren: () => import('./modules/electronic-appliance/electronic-appliance.module').then(m => m.ElectronicApplianceModule)},
   { path: 'Furniture', loadChildren: () => import('./modules/furniture/furniture.module').then(m => m.FurnitureModule) },
+  { path: 'Sports & Hobbies', loadChildren: () => import('./modules/sport/sport.module').then(m => m.SportModule) },
   { path : '', component : DashboardComponent},
   { path : 'post-menu', component : PostMenuComponent,canActivate: [AuthGuard]}
 
