@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonService } from 'src/app/shared/service/common.service';
 import { GadgetService } from '../../service/gadget.service';
@@ -6,7 +6,8 @@ import { GadgetService } from '../../service/gadget.service';
 @Component({
   selector: 'app-gadget-posts',
   templateUrl: './gadget-posts.component.html',
-  styleUrls: ['./gadget-posts.component.css']
+  styleUrls: ['./gadget-posts.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class GadgetPostsComponent {
 

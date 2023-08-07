@@ -32,3 +32,23 @@
 .mat-app-background{
   padding-left: 40px !important;
 }
+
+.load-more-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  width: 90%;
+}
+
+.load-more-btn {
+  background-color: #f1f1f1;
+  color: #222;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
