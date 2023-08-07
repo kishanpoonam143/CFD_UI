@@ -100,10 +100,12 @@ export class AddPostComponent {
     let pincode = event.target.value;
     if (pincode.length == 6) {
       this.commonService.getAddress(pincode).subscribe((data: any) => {
-        var address = data[0].PostOffice[1];
+        if (data[0].PostOffice != null) {
+        var address = data[0].PostOffice[0];
         this.commonPayload.state = address.State;
         this.commonPayload.city = address.District;
         this.commonPayload.nearBy = address.Name;
+        }
       })
     }
   }

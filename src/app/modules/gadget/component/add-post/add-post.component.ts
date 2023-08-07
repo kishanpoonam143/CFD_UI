@@ -93,7 +93,7 @@ export class AddPostComponent {
       this.progress = false;
       let imagesLength = data.length;
       let dataIndex = 0;
-      
+
       for (let j = 0; j < this.cardsCount.length && dataIndex < data.length; j++) {
         if (this.cardsCount[j] === "") {
           this.cardsCount[j] = data[dataIndex];
@@ -126,10 +126,12 @@ export class AddPostComponent {
     let pincode = event.target.value;
     if (pincode.length == 6) {
       this.commonService.getAddress(pincode).subscribe((data: any) => {
-        var address = data[0].PostOffice[1];
-        this.commonPayload.state = address.State;
-        this.commonPayload.city = address.District;
-        this.commonPayload.nearBy = address.Name;
+        if (data[0].PostOffice != null) {
+          var address = data[0].PostOffice[0];
+          this.commonPayload.state = address.State;
+          this.commonPayload.city = address.District;
+          this.commonPayload.nearBy = address.Name;
+        }
       })
     }
   }
@@ -186,11 +188,11 @@ export class AddPostComponent {
     })
   }
   saveGadgetPost(payload: any) {
-    if(this.validatePostForm(payload))
-    this.gadgetService.saveGadgetPost(payload).subscribe(data => {
-      this.showNotification("Post added succesfully");
-      console.log(data);
-    });
+    if (this.validatePostForm(payload))
+      this.gadgetService.saveGadgetPost(payload).subscribe(data => {
+        this.showNotification("Post added succesfully");
+        console.log(data);
+      });
   }
   addSpecificPayload(commonPayload: any): any {
     var imageList: { gadgetsId: number; imageId: string; imageURL: any; }[] = [];
@@ -248,7 +250,7 @@ export class AddPostComponent {
       this.showNotification("price is rerquired");
     else if (payload.price < 10 || payload.price > 100000)
       this.showNotification("price should be min 10 and max 100000");
-    else if (payload.vehicleImageList.length <= 0)
+    else if (payload.gadgetImageList.length <= 0)
       this.showNotification("In upload photo, at least 1 photo is required.");
     else if (payload.pincode.length < 6)
       this.showNotification("Pincode should be 6 digits");

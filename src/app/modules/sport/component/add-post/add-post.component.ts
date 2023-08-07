@@ -1,15 +1,11 @@
-import { DOCUMENT } from '@angular/common';
 import { Component, Inject } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { SportService } from '../../service/sport.service';
+import { DOCUMENT } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
-import { Observable, map, startWith } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/modules/user/service/user.service';
-import { FuelType } from 'src/app/shared/enum/FuelType';
-import { TransmissionType } from 'src/app/shared/enum/TransmissionType';
 import { Common } from 'src/app/shared/model/CommonPayload';
 import { CommonService } from 'src/app/shared/service/common.service';
-import { VehicleService } from '../../service/vehicle.service';
 
 @Component({
   selector: 'app-add-post',
@@ -18,90 +14,31 @@ import { VehicleService } from '../../service/vehicle.service';
 })
 export class AddPostComponent {
 
-  brandControl = new FormControl("");
-  modelControl = new FormControl("");
-  filteredBrands!: Observable<{ id: number; brandName: string; }[]>;
-  filteredModels!: Observable<{ id: number; model: string; }[]>;
   cardsCount: any[] = new Array(10);
   currentImageIndex: any = 0;
   numericValue: number = 0;
-  brands: any = [];
   selectedImage: string = "";
   commonPayload: Common = new Common();
   subCategory: string = '';
   mainCategory: string = '';
-  selectedFuelType: string = "";
   currentUploadImageIndex: number = 0;
-  fuelTypes = Object.keys(FuelType).map((key: any) => ({
-    label: key,
-    id: FuelType[key],
-  }));
-  transmissionTypes = Object.keys(TransmissionType).map((key: any) => ({
-    label: key,
-    id: TransmissionType[key],
-  }));
-  numberOfOwners = [1, 2, 3, 4];
-  selectedFuel: string = "";
-  selectedTransmission: any;
-  selectedOwnerNumber: Number = 0;
   allUploadedFiles: any = [];
-  brandId: any;
   progress: boolean = false;
-  vehicleData: any = {
-    fuelType: 0,
-    transmissionType: 0,
-    noOfOwner: 0,
-    kmDriven: 0,
-    year: 0
-  }
   userData: any;
   imageUrl: string = '../../../../../assets/img_not_available.png';
-  carModels: any;
-  carModelId: any;
-  constructor(private vehicleService: VehicleService, private commonService: CommonService, private snackBar: MatSnackBar, private route: ActivatedRoute,
-    @Inject(DOCUMENT) private document: Document, private userService: UserService) { }
+  constructor(private sportService: SportService, private commonService: CommonService, private snackBar: MatSnackBar, private route: ActivatedRoute,
+    @Inject(DOCUMENT) private document: Document, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
     this.getUserData();
-    this.fuelTypes = this.fuelTypes.slice(this.fuelTypes.length / 2);
-    this.transmissionTypes = this.transmissionTypes.slice(this.transmissionTypes.length / 2);
     for (var i = 0; i < this.cardsCount.length; i++) {
       this.cardsCount[i] = "";
     }
     this.route.queryParams.subscribe(params => {
-      this.subCategory = params['sub'];
-      this.mainCategory = params['main'];
+      this.subCategory = params['sub'].replaceAll("%20", " ");
+      this.mainCategory = params['main'].replaceAll("%20", " ");
       this.setCategoryId();
-      switch (this.subCategory) {
-        case "Cars": {
-          this.getCarBrands();
-          break;
-        }
-        case "Bikes": {
-          this.getBikeBrands();
-          break;
-        }
-        case "Scooty": {
-          this.getScootyBrands();
-          break;
-        }
-        case "Bicycle": {
-          this.getBicycleBrands();
-          break;
-        }
-      }
     });
-  }
-
-  filterBrands(value: any): { id: number; brandName: string }[] {
-    var filterValue = "";
-    if (typeof value == 'object')
-      filterValue = value.brandName.toLowerCase();
-    else
-      filterValue = value.toLowerCase();
-    return this.brands.filter(
-      (brand: any) => brand.brandName.toLowerCase().indexOf(filterValue) === 0
-    );
   }
   allowOnlyNumbers(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
@@ -125,7 +62,7 @@ export class AddPostComponent {
     for (let i = 0; i < files.length; i++) {
       formData.append("files", files[i]);
     }
-    this.vehicleService.uploadVehicleImages(formData).subscribe((data: any) => {
+    this.sportService.uploadSportImages(formData).subscribe((data: any) => {
       this.progress = false;
       let imagesLength = data.length;
       let dataIndex = 0;
@@ -156,17 +93,18 @@ export class AddPostComponent {
     this.commonPayload.name = this.userData.firstName;
     this.commonPayload.mobile = this.userData.mobileNo;
     var payload = this.addSpecificPayload(this.commonPayload);
-    this.saveVehiclePost(payload);
+    console.log(payload);
+    this.saveSportPost(payload);
   }
   getAddress(event: any) {
     let pincode = event.target.value;
     if (pincode.length == 6) {
       this.commonService.getAddress(pincode).subscribe((data: any) => {
         if (data[0].PostOffice != null) {
-          var address = data[0].PostOffice[0];
-          this.commonPayload.state = address.State;
-          this.commonPayload.city = address.District;
-          this.commonPayload.nearBy = address.Name;
+        var address = data[0].PostOffice[0];
+        this.commonPayload.state = address.State;
+        this.commonPayload.city = address.District;
+        this.commonPayload.nearBy = address.Name;
         }
       })
     }
@@ -177,36 +115,6 @@ export class AddPostComponent {
       horizontalPosition: 'end',
       verticalPosition: 'top'
     });
-  }
-  selectFuelType(fuel: any) {
-    this.selectedFuel = fuel.label;
-    this.vehicleData.fuelType = fuel.id;
-  }
-  selectTransmission(transmission: any) {
-    this.selectedTransmission = transmission.label;
-    this.vehicleData.transmissionType = transmission.id;
-  }
-  selectOwnerNumber(ownerNumber: Number) {
-    this.selectedOwnerNumber = ownerNumber;
-    this.vehicleData.noOfOwner = ownerNumber;
-  }
-  getCarBrands() {
-    this.vehicleService.getCarBrands().subscribe(data => {
-      this.brands = data;
-      this.getFilteredBrands();
-    });
-  }
-  getBikeBrands() {
-    this.vehicleService.getBikeBrands().subscribe(data => {
-      this.brands = data;
-      this.getFilteredBrands();
-    });
-  }
-  getFilteredBrands() {
-    this.filteredBrands = this.brandControl.valueChanges.pipe(
-      startWith(""),
-      map((value) => this.filterBrands(value || ""))
-    );
   }
   setSubCategory() {
     this.commonService.getSubCategoryByCategoryId(this.commonPayload.categoryId).subscribe((data: any) => {
@@ -229,49 +137,24 @@ export class AddPostComponent {
       }
     });
   }
-  addSpecificPayload(commonPayload: any): any {
-    var imageList: { vehiclesId: number; imageId: string; imageURL: any; }[] = [];
-    this.cardsCount.forEach(imageURL => {
-      if (imageURL != "")
-        imageList.push({ "vehiclesId": 0, "imageId": "100", "imageURL": imageURL });
-    });
-    var payload = Object.assign({}, commonPayload, this.vehicleData, {
-      vehicleImageList: imageList,
-      vehicelBrandId: this.brandId,
-    });
-    return payload;
-  }
-  handleBrand(data: any) {
-    this.brandId = data.id;
-    this.getCarModels(data.id);
-  }
-  displayBrand(brand: any): string {
-    return brand.brandName || "";
-  }
-  getScootyBrands() {
-    this.vehicleService.getScootyBrands().subscribe(data => {
-      this.brands = data;
-      this.getFilteredBrands();
-    })
-  }
-  getBicycleBrands() {
-    this.vehicleService.getBicycleBrands().subscribe(data => {
-      this.brands = data;
-      this.getFilteredBrands();
-    })
-  }
-  saveVehiclePost(payload: any) {
+  saveSportPost(payload: any) {
     if (this.validatePostForm(payload))
-      this.vehicleService.saveVehiclePost(payload).subscribe(data => {
+      this.sportService.saveSportPost(payload).subscribe(data => {
         this.showNotification("Post added succesfully");
         console.log(data);
+        this.router.navigateByUrl('/post-menu');
       });
   }
-  onYearChangeEvent(event: any) {
-    this.vehicleData.year = event.target.value;
-  }
-  onKmsChangeEvent(event: any) {
-    this.vehicleData.kmDriven = event.target.value;
+  addSpecificPayload(commonPayload: any): any {
+    var imageList: { furnituresId: number; imageId: string; imageURL: any; }[] = [];
+    this.cardsCount.forEach(imageURL => {
+      if (imageURL != "")
+        imageList.push({ "furnituresId": 0, "imageId": "100", "imageURL": imageURL });
+    });
+    var payload = Object.assign({}, commonPayload, {
+      sportImageList: imageList,
+    });
+    return payload;
   }
   getUserData() {
     let userId = localStorage.getItem('id');
@@ -304,7 +187,6 @@ export class AddPostComponent {
     })
   }
   validatePostForm(payload: any): boolean {
-    console.log(payload);
     let flag = false;
     if (payload.title == "")
       this.showNotification("Title is required");
@@ -318,41 +200,13 @@ export class AddPostComponent {
       this.showNotification("price is rerquired");
     else if (payload.price < 10 || payload.price > 1000000)
       this.showNotification("price should be min 10 and max 1000000");
-    else if (payload.vehicleImageList.length <= 0)
+    else if (payload.sportImageList.length <= 0)
       this.showNotification("In upload photo, at least 1 photo is required.");
     else if (payload.pincode.length < 6)
       this.showNotification("Pincode should be 6 digits");
     else
       flag = true;
     return flag;
-  }
-  getCarModels(brandId: Number) {
-    this.vehicleService.getCarModels(brandId).subscribe(res => {
-      this.carModels = res;
-      this.getFilteredModels();
-    });
-  }
-  getFilteredModels() {
-    this.filteredModels = this.modelControl.valueChanges.pipe(
-      startWith(""),
-      map((value) => this.filterModels(value || ""))
-    );
-  }
-  filterModels(value: any): { id: number; model: string }[] {
-    var filterValue = "";
-    if (typeof value == 'object')
-      filterValue = value.model.toLowerCase();
-    else
-      filterValue = value.toLowerCase();
-    return this.carModels.filter(
-      (model: any) => model.model.toLowerCase().indexOf(filterValue) === 0
-    );
-  }
-  displayModel(model: any): string {
-    return model?.model || "";
-  }
-  handleModel(data: any) {
-    this.carModelId = data.id;
   }
   selectProfilePicture() {
     if (this.document) {

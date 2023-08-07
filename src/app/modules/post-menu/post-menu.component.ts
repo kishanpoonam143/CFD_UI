@@ -10,20 +10,20 @@ export class PostMenuComponent {
 
   mainCategories: any = [];
   subCategories: any = [];
-  selectedCategory : any ;
-  constructor(private commonService : CommonService) { }
+  selectedCategory: any;
+  constructor(private commonService: CommonService) { }
 
   ngOnInit() {
     this.getAllCategory();
   }
-  showSubCategories(mainCategory:any){
+  showSubCategories(mainCategory: any) {
     this.selectedCategory = mainCategory.categoryName;
-    this.commonService.getSubCategoryByCategoryId(mainCategory.id).subscribe((data:any)=>{
+    this.commonService.getSubCategoryByCategoryId(mainCategory.id).subscribe((data: any) => {
       this.subCategories = data;
     });
   }
-  getAllCategory(){
-    this.commonService.getAllCategory().subscribe((data:any)=>{
+  getAllCategory() {
+    this.commonService.getAllCategory().subscribe((data: any) => {
       this.mainCategories = data;
     });
   }

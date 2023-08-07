@@ -432,10 +432,43 @@
             <a class="dropdown-toggle">Sports & Hobbies</a>
           </div>
           <ul class="dropdown-menu">
-            <li><a>Gym & Fitness</a></li>
-            <li><a>Musical Instruments</a></li>
-            <li><a>Sports Equipment</a></li>
-            <li><a>Other Hobbies</a></li>
+            <li>
+              <a
+                [routerLink]="'/Sports & Hobbies/view-posts'"
+                [queryParams]="{
+                  type: 'Sport',
+                  sub: sportTypes.GymAndFitness
+                }"
+                >Gym & Fitness</a
+              >
+            </li>
+            <li>
+              <a
+                [routerLink]="'/Sports & Hobbies/view-posts'"
+                [queryParams]="{ type: 'Sport', sub: sportTypes.MusicalInstruments }"
+                >Musical Instruments</a
+              >
+            </li>
+            <li>
+              <a
+                [routerLink]="'/Sports & Hobbies/view-posts'"
+                [queryParams]="{
+                  type: 'Sport',
+                  sub: sportTypes.SportsEquipment
+                }"
+                >Sports Equipment</a
+              >
+            </li>
+            <li>
+              <a
+                [routerLink]="'/Sports & Hobbies/view-posts'"
+                [queryParams]="{
+                  type: 'Sport',
+                  sub: sportTypes.OtherHobbies
+                }"
+                >Other Hobbies</a
+              >
+            </li>
           </ul>
         </li>
         <li class="dropdown auto-pointer-events">

@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate {
     const allowedUserRoutes = [""];
     const commonRoutes = [
       "post-menu","Gadgets", "add-post", "view-posts","post-details/:id",
-      "Vehicles", "add-post", "view-posts","post-details/:id",
+      "Vehicles",'Electronics & Appliances','Furniture','Sports & Hobbies',
       "user","account","account/personal","account/myadds","account/security"]
     const requestedRoute = route.routeConfig?.path || "";
     if (userRole == 'Admin') {

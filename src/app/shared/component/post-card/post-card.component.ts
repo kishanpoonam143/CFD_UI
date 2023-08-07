@@ -55,19 +55,11 @@ export class PostCardComponent implements OnInit {
             (this.currentPage + 1) * this.pageSize
         );
     }
-    navigateToDetails(data: any) {
-        this.getMainCategoryName(data);
-        setTimeout(() => {
-            this.navigateToCardDetails(data);
-        });
-    }
     getMainCategories() {
         this.commonService.getAllCategory().subscribe((data: any) => {
             this.mainCategories = data;
+            this.setMainCategoryName(this.paginatedCards);
         });
-    }
-    onLinkRightClick(data: any) {
-        this.getMainCategoryName(data);
     }
     getMainCategoryName(data: any) {
         for (var i = 0; i < this.mainCategories.length; i++) {
@@ -86,13 +78,21 @@ export class PostCardComponent implements OnInit {
             return card.electronicApplianceImageList[0]?.imageURL;
         } else if (card.furnitureImageList && card.furnitureImageList[0]?.imageURL) {
             return card.furnitureImageList[0]?.imageURL;
+        }else if (card.sportImageList && card.sportImageList[0]?.imageURL) {
+            return card.sportImageList[0]?.imageURL;
         }
         else {
             return '../../../assets/image_not_available.png';
         }
     }
-    navigateToCardDetails(data: any) {
-        const route = '/' + this.mainCategory + '/post-details/' + data.tableRefGuid;
-        this.router.navigate([route]);
+    setMainCategoryName(cards: any) {
+        for (var i = 0; i < cards.length; i++) {
+            for (var j = 0; j < this.mainCategories.length; j++) {
+                if (cards[i].categoryId == this.mainCategories[j].id) {
+                    cards[i].mainCategory = this.mainCategories[j].categoryName;
+                    break;
+                }
+            }
+        }
     }
 }
