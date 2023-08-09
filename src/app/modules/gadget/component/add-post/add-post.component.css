@@ -336,3 +336,25 @@ button {
   .w-50{
     width: 50%;
   }
+
+
+      /* Changes made by hamza */
+      .first-image {
+        position: relative;
+    }
+      
+    .cover-tag {
+        position: absolute;
+        top: 68px;
+        right: 15px;
+        left: 15px;
+        background-color: #0d475c;
+        color: white;
+        font-size: 12px;
+        font-weight: 500;
+        padding: 5px 6px;
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }

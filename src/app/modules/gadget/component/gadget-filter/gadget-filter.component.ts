@@ -41,6 +41,10 @@ export class GadgetFilterComponent {
   @ViewChild('nearByMatAutocomplete') nearByAutocomplete!: MatAutocomplete;
   @ViewChild(MatSelectionList)
   matSelectionList!: MatSelectionList;
+
+  // Changes made by Hamza
+  filtersSelected: boolean = false; 
+
   constructor(private commonService: CommonService, private route: ActivatedRoute,
     private gadgetService: GadgetService) { }
 
@@ -79,6 +83,8 @@ export class GadgetFilterComponent {
       this.appliedFilters = this.appliedFilters.filter((item: any) => (item.name != 'city' && item.name != 'nearBy'));
     else
       this.getCities(event.option.value.id);
+
+    this.filtersSelected = true; //Changes made by Hamza
   }
   getCities(stateId: Number) {
     this.commonService.getCitiesByState(stateId).subscribe(data => {
@@ -94,11 +100,14 @@ export class GadgetFilterComponent {
       this.appliedFilters = this.appliedFilters.filter((item: any) => (item.name != 'nearBy'));
     else
       this.getNearByPlaces(event.option.value.id);
+
+    this.filtersSelected = true; //Changes made by Hamza
   }
   onNearByChange(event: any) {
     this.filterObj.nearBy = (event.option.value == null) ? null : event.option.value.name;
     this.updateAppliedFilters("nearBy", this.filterObj.nearBy);
     this.commonService.setData(this.filterObj);
+    this.filtersSelected = true; //Changes made by Hamza
   }
   priceChange() {
     let prices = [];
@@ -107,6 +116,7 @@ export class GadgetFilterComponent {
     this.filterObj.price = prices;
     this.commonService.setData(this.filterObj);
     this.updateAppliedFilters("price", this.formatAmount(this.fromPrice) + " - " + this.formatAmount(this.toPrice));
+    this.filtersSelected = true; //Changes made by Hamza
   }
   getMobileBrands() {
     this.gadgetService.getMobileBrands().subscribe(data => {
@@ -122,6 +132,7 @@ export class GadgetFilterComponent {
     }
     this.filterObj.mobileBrandId = brandIds;
     this.commonService.setData(this.filterObj);
+    this.filtersSelected = true; //Changes made by Hamza
   }
   getTabletBrands() {
     this.gadgetService.getTabletBrands().subscribe(data => {
@@ -274,5 +285,24 @@ export class GadgetFilterComponent {
       this.nearByPlaces = data;
       this.getFilteredNearBy();
     })
+  }
+
+  universalReset() {
+    // Reset all filters
+    this.resetFilters();
+    this.stateControl.patchValue("");
+    this.cityControl.patchValue("");
+    this.nearByControl.patchValue("");
+    this.fromPrice = 0;
+    this.toPrice = 0;
+    this.selectedBrand = '';
+
+    this.filterObj = new Filter();  // Reset to initial filters
+    this.appliedFilters = [];
+
+    this.filtersSelected = false;
+
+    window.location.reload();
+    
   }
 }
