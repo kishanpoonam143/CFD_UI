@@ -3,7 +3,7 @@ import * as moment from 'moment';
 import { VehicleService } from '../../service/vehicle.service';
 import { FuelType } from 'src/app/shared/enum/FuelType';
 import { TransmissionType } from 'src/app/shared/enum/TransmissionType';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 @Component({
@@ -35,7 +35,10 @@ export class PostDetailComponent {
     { title: "Iphonr 12", price: 45000, state: "Telangana", city: "Hyderabad", nearBy: "Ameerpet", imageUrl: "https://m.media-amazon.com/images/I/61bK6PMOC3L._AC_UF1000,1000_QL80_.jpg" },
     { title: "Iphonr 13", price: 55000, state: "Telangana", city: "Hyderabad", nearBy: "Punjagutta", imageUrl: "https://m.media-amazon.com/images/I/61bK6PMOC3L._AC_UF1000,1000_QL80_.jpg" },
   ];
-  constructor(private vehicleService: VehicleService, private route: ActivatedRoute, private location: Location) { }
+
+  targetRoute: any;
+
+  constructor(private vehicleService: VehicleService, private route: ActivatedRoute, private location: Location, private router: Router, ) { }
 
   ngOnInit() {
     this.fuelTypes = this.fuelTypes.slice(this.fuelTypes.length / 2);
@@ -43,6 +46,7 @@ export class PostDetailComponent {
     var tableRefGuid;
     this.route.paramMap.subscribe((params) => {
       tableRefGuid = params.get('id');
+      this.targetRoute = params.get('targetRoute');
     });
     if (tableRefGuid != null) {
       this.getVehiclePost(tableRefGuid);
@@ -50,7 +54,12 @@ export class PostDetailComponent {
   }
 
   goBack() {
-    this.location.back();
+    this.router.navigate(['/Vehicles/view-posts'], {
+      queryParams: {
+        type: 'Vehicle',
+        sub: 4
+      }
+    });
   }
 
   getVehiclePost(guid: any) {

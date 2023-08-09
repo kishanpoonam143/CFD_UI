@@ -110,3 +110,7 @@
     .selected-states-container {
     margin-top: 15px; 
     }
+
+    .filterSepreator{
+      margin-top: -10px;
+    }

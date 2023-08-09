@@ -336,16 +336,15 @@ button {
       
       .cover-tag {
         position: absolute;
-        top: 68px;
-        right: 15px;
-        left: 15px;
-        background-color: #0d475c;
+        top: 75px;
+        width: 100%;
+        background-color: #007bff;
         color: white;
         font-size: 12px;
         font-weight: 500;
         padding: 5px 6px;
-        border-radius: 3px;
+        border-radius: 2px;
         display: flex;
         align-items: center;
         justify-content: center;
-      }
+    }
