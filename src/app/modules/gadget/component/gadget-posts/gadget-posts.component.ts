@@ -34,11 +34,21 @@ export class GadgetPostsComponent {
   }
   getPosts() {
     this.cards = [];
-    this.gadgetService.getAllGadgetPosts().subscribe((data: any) => {
-      this.actualCards = data;
-      this.cards = this.actualCards.filter((card: any) => card.subCategoryId == this.subCategoryId);
+    if (this.subCategoryId) {
+      // Show posts for a specific sub-category
+      this.gadgetService.getAllGadgetPosts().subscribe((data: any) => {
+        this.actualCards = data;
+        this.cards = this.actualCards.filter((card: any) => card.subCategoryId == this.subCategoryId);
+        this.isLoading = false;
+      })
+    } else if (this.category === 'Gadget') {
+      // Show all posts within the "Gadgets" category
+      this.gadgetService.getAllGadgetPosts().subscribe((data: any) => {
+        this.actualCards = data;
+        this.cards = this.actualCards;
+      })
       this.isLoading = false;
-    })
+    }
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();

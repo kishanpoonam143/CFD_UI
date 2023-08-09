@@ -164,7 +164,11 @@
         <li class="dropdown auto-pointer-events">
           <div class="li-item link-item">
             <span class="material-icons"> devices_other </span>
-            <a>Gadgets</a>
+            <a
+              [routerLink]="'/Gadgets/view-posts'"
+              [queryParams]="{ type: 'Gadget' }"
+              >Gadgets</a
+            >
           </div>
           <ul class="dropdown-menu">
             <li>
@@ -279,7 +283,7 @@
         <li class="dropdown auto-pointer-events">
           <div class="li-item link-item">
             <span class="material-icons"> tv</span>
-            <a class="dropdown-toggle">Electronics & Appliances</a>
+            <a class="dropdown-toggle">Electronics</a>
           </div>
           <ul class="dropdown-menu">
             <li>
@@ -377,7 +381,7 @@
         <li class="dropdown dropdown auto-pointer-events">
           <div class="li-item link-item">
             <span class="material-icons"> bed </span>
-            <a>Furniture & Household</a>
+            <a>Furniture</a>
           </div>
           <ul class="dropdown-menu">
             <li>
@@ -431,7 +435,7 @@
         <li class="dropdown auto-pointer-events">
           <div class="li-item link-item">
             <span class="material-icons"> sports_soccer </span>
-            <a class="dropdown-toggle">Sports & Hobbies</a>
+            <a class="dropdown-toggle">Sports & Hobbies </a>
           </div>
           <ul class="dropdown-menu">
             <li>
@@ -508,6 +512,17 @@
             <li><a>Men</a></li>
             <li><a>Women</a></li>
             <li><a>Life Partner</a></li>
+          </ul>
+        </li>
+        <li class="dropdown auto-pointer-events">
+          <div class="li-item">
+            <span class="material-icons-outlined"> groups </span>
+            <a class="dropdown-toggle">Community</a>
+          </div>
+          <ul class="dropdown-menu">
+            <li><a>Rural</a></li>
+            <li><a>Urban</a></li>
+            <li><a>SubUrban</a></li>
           </ul>
         </li>
         <li class="dropdown auto-pointer-events">

@@ -58,6 +58,9 @@ export class AddPostComponent {
   imageUrl: string = '../../../../../assets/img_not_available.png';
   carModels: any;
   carModelId: any;
+
+  firstImageUploaded: boolean = false; // Changes made by Hamza
+
   constructor(private vehicleService: VehicleService, private commonService: CommonService, private snackBar: MatSnackBar, private route: ActivatedRoute,
     @Inject(DOCUMENT) private document: Document, private userService: UserService) { }
 
@@ -136,6 +139,12 @@ export class AddPostComponent {
           dataIndex++;
           imagesLength--;
         }
+
+        // Set firstImageUploaded to true if this is the first image
+        if (!this.firstImageUploaded) {
+          this.firstImageUploaded = true;
+        }
+
       };
     })
   }

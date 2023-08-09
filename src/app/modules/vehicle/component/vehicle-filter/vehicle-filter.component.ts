@@ -59,6 +59,11 @@ export class VehicleFilterComponent {
   @ViewChild('nearByMatAutocomplete') nearByAutocomplete!: MatAutocomplete;
   @ViewChild(MatSelectionList)
   matSelectionList!: MatSelectionList;
+
+  //Changes made by Hamza
+  filtersSelected: boolean = false; 
+  initialFilters: any;
+
   constructor(private commonService: CommonService, private route: ActivatedRoute,
     private vehicleService: VehicleService) { }
 
@@ -84,6 +89,8 @@ export class VehicleFilterComponent {
         }
       }
     });
+    this.initialFilters = { ...this.filterObj };
+    
   }
   getAllStates() {
     this.commonService.getStatesByCountry(this.country.id).subscribe(data => {
@@ -99,6 +106,11 @@ export class VehicleFilterComponent {
       this.appliedFilters = this.appliedFilters.filter((item: any) => (item.name != 'city' && item.name != 'nearBy'));
     else
       this.getCities(event.option.value.id);
+
+    this.filtersSelected = true; //Changes made by Hamza
+    this.filterObj.state = event.option.value ? event.option.value.name : null;
+    this.filterObj.city = null; // Reset city when state changes
+    this.filterObj.nearBy = null; // Reset nearby when state changes
   }
   getCities(stateId: Number) {
     this.commonService.getCitiesByState(stateId).subscribe(data => {
@@ -114,11 +126,13 @@ export class VehicleFilterComponent {
       this.appliedFilters = this.appliedFilters.filter((item: any) => (item.name != 'nearBy'));
     else
       this.getNearByPlaces(event.option.value.id);
+    this.filtersSelected = true; //Changes made by Hamza
   }
   onNearByChange(event: any) {
     this.filterObj.nearBy = (event.option.value == null) ? null : event.option.value.name;
     this.updateAppliedFilters("nearBy", this.filterObj.nearBy);
     this.commonService.setData(this.filterObj);
+    this.filtersSelected = true; //Changes made by Hamza
   }
   priceChange() {
     let prices = [];
@@ -127,6 +141,7 @@ export class VehicleFilterComponent {
     this.filterObj.price = prices;
     this.commonService.setData(this.filterObj);
     this.updateAppliedFilters("price", this.formatAmount(this.fromPrice) + " - " + this.formatAmount(this.toPrice));
+    this.filtersSelected = true; //Changes made by Hamza
   }
   getCarBrands() {
     this.vehicleService.getCarBrands().subscribe(data => {
@@ -147,6 +162,7 @@ export class VehicleFilterComponent {
     }
     this.filterObj.vehicelBrandId = brandIds;
     this.commonService.setData(this.filterObj);
+    this.filtersSelected = true; //Changes made by Hamza
   }
   kmsChange() {
     var kms = [];
@@ -155,6 +171,7 @@ export class VehicleFilterComponent {
     this.filterObj.kmDriven = kms;
     this.commonService.setData(this.filterObj);
     this.updateAppliedFilters("kms", this.formatKms(this.fromKms) + " - " + this.formatKms(this.toKms));
+    this.filtersSelected = true; //Changes made by Hamza
   }
   onFuelSelect(event: any) {
     let fuelIds = [];
@@ -165,6 +182,7 @@ export class VehicleFilterComponent {
     }
     this.filterObj.fuelType = fuelIds;
     this.commonService.setData(this.filterObj);
+    this.filtersSelected = true; //Changes made by Hamza
   }
   onTransmissionSelect(event: any) {
     let transmissionIds = [];
@@ -175,6 +193,7 @@ export class VehicleFilterComponent {
     }
     this.filterObj.transmissionType = transmissionIds;
     this.commonService.setData(this.filterObj);
+    this.filtersSelected = true; //Changes made by Hamza
   }
   yearChange() {
     var year = [];
@@ -183,6 +202,7 @@ export class VehicleFilterComponent {
     this.filterObj.year = year;
     this.commonService.setData(this.filterObj);
     this.updateAppliedFilters("year", year[0] + " - " + year[1]);
+    this.filtersSelected = true; //Changes made by Hamza
   }
   onOwnerSelect(event: any) {
     this.filterObj.noOfOwner = event.value;
@@ -191,6 +211,7 @@ export class VehicleFilterComponent {
       this.updateAppliedFilters("noOfOwner", value);
     }
     this.commonService.setData(this.filterObj);
+    this.filtersSelected = true; //Changes made by Hamza
   }
   removeItem(item: any): void {
     if (item.name == 'state') {
@@ -312,6 +333,28 @@ export class VehicleFilterComponent {
       select.writeValue(selectedOptions);
     }
   }
+
+  clearFilters() {
+    this.resetFilters();
+    this.filtersSelected = false;
+    this.stateControl.patchValue("");
+    this.cityControl.patchValue("");
+    this.nearByControl.patchValue("");
+    this.fromPrice = 0;
+    this.toPrice = 0;
+    this.selectedBrand = '';
+    this.fromKms = 0;
+    this.toKms = 0;
+    this.fromYear = null;
+    this.toYear = null;
+    this.filterObj = { ...this.initialFilters }; // Reset to initial filters
+    this.appliedFilters = [];
+    this.ownerMultiSelect.writeValue([]);
+    this.fuelMultiSelect.writeValue([]);
+    this.transMultiSelect.writeValue([]);
+    window.location.reload();
+  }
+
 
   resetFilters() {
     this.stateControl.patchValue("");
