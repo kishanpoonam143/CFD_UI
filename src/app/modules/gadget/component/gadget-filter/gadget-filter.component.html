@@ -3,7 +3,7 @@
     <div class="filter-heading">Filters</div>
     <div
       class="clear-filters"
-      *ngIf="filtersSelected"
+      *ngIf="filtersSelected && appliedFilters.length > 0"
       (click)="universalReset()"
     >
       Reset
@@ -25,6 +25,7 @@
     </div>
   </div>
   <br />
+  <hr class="filterSepreator" />
   <!-- Location Filter -->
   <mat-form-field appearance="fill" class="form-field-w-100">
     <mat-label>State</mat-label>
