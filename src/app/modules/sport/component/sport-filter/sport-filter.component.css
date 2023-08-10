@@ -1,6 +1,12 @@
 .grid {
-    display: grid;
-    margin-left: 20px;
+  padding: 0 20px;
+  background-color: #fff;
+  position: sticky;
+  top: 110px;
+  left: 0;
+  bottom: 0;
+  overflow-y: auto;
+  scrollbar-width: none; 
   }
   
   .example-label-container {
@@ -49,3 +55,34 @@
   .pd-5 {
     padding: 5px 0;
   }
+
+  
+  /* Chagnes Made By Hamza */
+  
+  .sidebar-container::-webkit-scrollbar {
+    display: none;
+    }
+    
+    .example-margin {
+    margin: 8px;
+    margin-left: 12px !important;
+    max-width: 284px;
+    min-width: 210px;
+    }
+    
+    .form-field-w-100{
+    width: 100%;
+    }
+    
+    .price-slider{
+    gap: 8px;
+    }
+    
+    .ml-8{
+    margin-left: 15px;
+    }
+    
+    .selected-states-container {
+    margin-top: 15px; 
+    }
+  

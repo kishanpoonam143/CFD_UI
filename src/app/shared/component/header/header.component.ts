@@ -29,7 +29,27 @@ export class HeaderComponent implements OnInit {
   userData: any;
   imageUrl: string = "https://icon-library.com/images/default-profile-icon/default-profile-icon-24.jpg";
   dialogRef: MatDialogRef<any> | null = null;
-  constructor(private dialog: MatDialog, private router: Router, private userService: UserService) { }
+  constructor(private dialog: MatDialog, private router: Router, private userService: UserService) {
+
+   }
+
+   generateGadgetsLink(subCategory?: GadgetType) {
+    if (subCategory) {
+      return '/Gadgets/view-posts?type=Gadget&sub=' + subCategory;
+    } else {
+      return '/Gadgets/view-posts?type=Gadget';
+    }
+  }
+
+  generateQueryParams() {
+    const queryParams = {
+      type: 'Gadget',
+      sub: [this.gadgetsTypes.Mobiles, this.gadgetsTypes.Tablets, this.gadgetsTypes.Accessories]
+    };
+    console.log([this.gadgetsTypes.Mobiles, this.gadgetsTypes.Tablets, this.gadgetsTypes.Accessories])
+
+    return queryParams;
+  }
 
   searchQuery: string = '';
 

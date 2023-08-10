@@ -1,20 +1,35 @@
 <div class="grid sidebar-container">
+  <div class="filters-head">
+    <div class="filter-heading">Filters</div>
+    <div
+      class="clear-filters"
+      *ngIf="filtersSelected && appliedFilters.length > 0"
+      (click)="clearFilters()"
+    >
+      Reset
+    </div>
+    <iframe id="hiddenFrame" style="display: none"></iframe>
+  </div>
+
   <!-- Price Range Filter -->
   <div>
     <div class="selected-states-container">
       <mat-chip-listbox>
-        <mat-chip-option
-          *ngFor="let filter of appliedFilters"
-          (removed)="removeItem(filter)"
-          >{{ filter.value }}
-          <button matChipRemove aria-label="Remove orange">
-            <mat-icon>cancel</mat-icon>
-          </button></mat-chip-option
-        >
+        <div class="selected-states">
+          <mat-chip-option
+            *ngFor="let filter of appliedFilters"
+            (removed)="removeItem(filter)"
+            >{{ filter.value }}
+            <button matChipRemove aria-label="Remove orange">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-option>
+        </div>
       </mat-chip-listbox>
     </div>
   </div>
   <br />
+  <hr class="filterSepreator" />
   <!-- Location Filter -->
   <mat-form-field appearance="fill" class="form-field-w-100">
     <mat-label>State</mat-label>

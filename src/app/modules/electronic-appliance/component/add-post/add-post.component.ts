@@ -28,6 +28,7 @@ export class AddPostComponent {
   progress: boolean = false;
   userData: any;
   imageUrl: string = '../../../../../assets/img_not_available.png';
+  firstImageUploaded: boolean = false; // Changes made by Hamza
   constructor(private electronicApplianceService: ApplianceService, private commonService: CommonService, private snackBar: MatSnackBar, private route: ActivatedRoute,
     @Inject(DOCUMENT) private document: Document, private userService: UserService,private router : Router) { }
 
@@ -74,6 +75,11 @@ export class AddPostComponent {
           this.cardsCount[j] = data[dataIndex];
           dataIndex++;
           imagesLength--;
+        }
+
+        // Set firstImageUploaded to true if this is the first image
+        if (!this.firstImageUploaded) {
+          this.firstImageUploaded = true;
         }
       };
     })

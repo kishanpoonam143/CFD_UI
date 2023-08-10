@@ -1,8 +1,3 @@
-.grid{
-  display: grid;
-  padding-left: 20px;
-  background-color: #fff;
-}
 .example-label-container {
   justify-content: space-between;
   margin: 20px 10px 0;
@@ -39,12 +34,42 @@ padding: 5px 0;
 
 /* Chagnes Made By Hamza */
 
-.sidebar-container {
-position: sticky;
-top: 0;
-height: calc(100vh - 20px); 
-overflow-y: scroll;
-scrollbar-width: none; 
+.filters-head{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 15px;
+  margin-right: 5px;
+}
+
+.filter-heading{
+  font-size: 18px;
+  font-weight: 500;
+  color: #0d475c;
+}
+
+.clear-filters{
+  color: #2874F0;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+
+.clear-filters:hover{
+  cursor: pointer;
+}
+
+
+.grid{
+  padding: 0 20px;
+  background-color: #fff;
+  position: sticky;
+  top: 110px;
+  /* height: calc(100vh - 100px); */
+  left: 0;
+  bottom: 0;
+  overflow-y: scroll;
+  scrollbar-width: none; 
 }
 
 .sidebar-container::-webkit-scrollbar {
@@ -59,7 +84,7 @@ min-width: 210px;
 }
 
 .form-field-w-100{
-width: 93%;
+width: 99%;
 }
 
 .price-slider{
@@ -72,4 +97,12 @@ margin-left: 15px;
 
 .selected-states-container {
 margin-top: 15px; 
+}
+
+.remove-chip{
+  margin-left: 50px;
+}
+
+.filterSepreator{
+  margin-top: -10px;
 }

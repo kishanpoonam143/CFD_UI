@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
 import { FurnitureService } from '../../service/furniture.service';
 import { ActivatedRoute } from '@angular/router';
 import { CommonService } from 'src/app/shared/service/common.service';
@@ -6,7 +6,8 @@ import { CommonService } from 'src/app/shared/service/common.service';
 @Component({
   selector: 'app-furniture-posts',
   templateUrl: './furniture-posts.component.html',
-  styleUrls: ['./furniture-posts.component.css']
+  styleUrls: ['./furniture-posts.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class FurniturePostsComponent {
 

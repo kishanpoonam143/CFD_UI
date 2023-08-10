@@ -3,7 +3,6 @@
 }
 
 .cards {
-  margin-left: 45px;
   width: 100%;
 }
 
@@ -20,4 +19,22 @@
 
 .w-30 {
   width: 30%;
+}
+
+/* changes made by hamza */
+
+.mr-20 {
+  margin-right: 20px;
+}
+
+.bg{
+  background-color: #fafafa;
+}
+
+.mat-app-background{
+  padding-left: 40px !important;
+}
+
+.bg-white{
+  background-color: #fff;
 }
