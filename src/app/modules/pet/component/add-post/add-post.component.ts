@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { SportService } from '../../service/sport.service';
+import { PetService } from '../../service/pet.service';
 import { DOCUMENT } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -26,7 +26,7 @@ export class AddPostComponent {
   progress: boolean = false;
   userData: any;
   imageUrl: string = '../../../../../assets/img_not_available.png';
-  constructor(private sportService: SportService, private commonService: CommonService, private snackBar: MatSnackBar, private route: ActivatedRoute,
+  constructor(private petService: PetService, private commonService: CommonService, private snackBar: MatSnackBar, private route: ActivatedRoute,
     @Inject(DOCUMENT) private document: Document, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
@@ -62,7 +62,7 @@ export class AddPostComponent {
     for (let i = 0; i < files.length; i++) {
       formData.append("files", files[i]);
     }
-    this.sportService.uploadSportImages(formData).subscribe((data: any) => {
+    this.petService.uploadPetImages(formData).subscribe((data: any) => {
       this.progress = false;
       let imagesLength = data.length;
       let dataIndex = 0;
@@ -94,17 +94,17 @@ export class AddPostComponent {
     this.commonPayload.mobile = this.userData.mobileNo;
     var payload = this.addSpecificPayload(this.commonPayload);
     console.log(payload);
-    this.saveSportPost(payload);
+    this.savePetPost(payload);
   }
   getAddress(event: any) {
     let pincode = event.target.value;
     if (pincode.length == 6) {
       this.commonService.getAddress(pincode).subscribe((data: any) => {
         if (data[0].PostOffice != null) {
-        var address = data[0].PostOffice[0];
-        this.commonPayload.state = address.State;
-        this.commonPayload.city = address.District;
-        this.commonPayload.nearBy = address.Name;
+          var address = data[0].PostOffice[0];
+          this.commonPayload.state = address.State;
+          this.commonPayload.city = address.District;
+          this.commonPayload.nearBy = address.Name;
         }
       })
     }
@@ -137,22 +137,22 @@ export class AddPostComponent {
       }
     });
   }
-  saveSportPost(payload: any) {
+  savePetPost(payload: any) {
     if (this.validatePostForm(payload))
-      this.sportService.saveSportPost(payload).subscribe(data => {
+      this.petService.savePetPost(payload).subscribe(data => {
         this.showNotification("Post added succesfully");
         console.log(data);
         this.router.navigateByUrl('/post-menu');
       });
   }
   addSpecificPayload(commonPayload: any): any {
-    var imageList: { sportsId: number; imageId: string; imageURL: any; }[] = [];
+    var imageList: { petsId: number; imageId: string; imageURL: any; }[] = [];
     this.cardsCount.forEach(imageURL => {
       if (imageURL != "")
-        imageList.push({ "sportsId": 0, "imageId": "100", "imageURL": imageURL });
+        imageList.push({ "petsId": 0, "imageId": "100", "imageURL": imageURL });
     });
     var payload = Object.assign({}, commonPayload, {
-      sportImageList: imageList,
+      petImageList: imageList,
     });
     return payload;
   }
@@ -200,7 +200,7 @@ export class AddPostComponent {
       this.showNotification("price is rerquired");
     else if (payload.price < 10 || payload.price > 1000000)
       this.showNotification("price should be min 10 and max 1000000");
-    else if (payload.sportImageList.length <= 0)
+    else if (payload.petImageList.length <= 0)
       this.showNotification("In upload photo, at least 1 photo is required.");
     else if (payload.pincode.length < 6)
       this.showNotification("Pincode should be 6 digits");

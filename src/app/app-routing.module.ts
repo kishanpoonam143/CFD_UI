@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'Electronics & Appliances', loadChildren: () => import('./modules/electronic-appliance/electronic-appliance.module').then(m => m.ElectronicApplianceModule)},
   { path: 'Furniture', loadChildren: () => import('./modules/furniture/furniture.module').then(m => m.FurnitureModule) },
   { path: 'Sports & Hobbies', loadChildren: () => import('./modules/sport/sport.module').then(m => m.SportModule) },
+  { path: 'Pets', loadChildren: () => import('./modules/pet/pet.module').then(m => m.PetModule) },
   { path : '', component : DashboardComponent},
   { path : 'post-menu', component : PostMenuComponent,canActivate: [AuthGuard]}
 
