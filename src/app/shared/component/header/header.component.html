@@ -486,10 +486,46 @@
             <a class="dropdown-toggle">Pets</a>
           </div>
           <ul class="dropdown-menu">
-            <li><a>Fishes & Aquarium</a></li>
-            <li><a>Pet Food & Accessories</a></li>
-            <li><a>Dogs</a></li>
-            <li><a>Other Pets</a></li>
+            <li>
+              <a
+                [routerLink]="'/Pets/view-posts'"
+                [queryParams]="{
+                  type: 'Pet',
+                  sub: petTypes.FishesAndAquarium
+                }"
+                >Fishes & Aquarium</a
+              >
+            </li>
+            <li>
+              <a
+                [routerLink]="'/Pets/view-posts'"
+                [queryParams]="{
+                  type: 'Pet',
+                  sub: petTypes.PetFoodAndAccessories
+                }"
+                >Pet Food & Accessories</a
+              >
+            </li>
+            <li>
+              <a
+                [routerLink]="'/Pets/view-posts'"
+                [queryParams]="{
+                  type: 'Pet',
+                  sub: petTypes.Dogs
+                }"
+                >Dogs</a
+              >
+            </li>
+            <li>
+              <a
+                [routerLink]="'/Pets/view-posts'"
+                [queryParams]="{
+                  type: 'Pet',
+                  sub: petTypes.OtherPets
+                }"
+                >Other Pets</a
+              >
+            </li>
           </ul>
         </li>
         <li class="dropdown auto-pointer-events">
