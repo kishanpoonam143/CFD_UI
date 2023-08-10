@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FurnitureService } from '../../service/furniture.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 
 @Component({
@@ -26,7 +26,7 @@ export class PostDetailsComponent {
   ];
   itemsPerPage = 4;
   currentPage = 0;
-  constructor(private furnitureService: FurnitureService, private route: ActivatedRoute) { }
+  constructor(private furnitureService: FurnitureService, private route: ActivatedRoute,  private router: Router) { }
 
   ngOnInit() {
     var tableRefGuid;
@@ -37,6 +37,16 @@ export class PostDetailsComponent {
       this.getFurniturePost(tableRefGuid);
     }
   }
+
+  goBack() {
+    this.router.navigate(['/Furniture/view-posts'], {
+      queryParams: {
+        type: 'Furniture',
+        sub: 39
+      }
+    });
+  }
+
   getFurniturePost(guid: any) {
     this.furnitureService.getFurniturePostByGuid(guid).subscribe((data: any) => {
       this.postDetails = data[0];

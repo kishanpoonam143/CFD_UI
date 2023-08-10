@@ -38,6 +38,8 @@ export class PostDetailComponent {
 
   targetRoute: any;
 
+  isZoomed: boolean = false;
+
   constructor(private vehicleService: VehicleService, private route: ActivatedRoute, private location: Location, private router: Router, ) { }
 
   ngOnInit() {
@@ -50,6 +52,24 @@ export class PostDetailComponent {
     });
     if (tableRefGuid != null) {
       this.getVehiclePost(tableRefGuid);
+    }
+  }
+
+  zoomIn() {
+    this.isZoomed = !this.isZoomed;
+
+    // Toggle a class to style the expanded image
+    const imgElement = document.querySelector('.postImgCont');
+    if (imgElement) {
+      imgElement.classList.toggle('zoomed');
+    }
+  }
+
+  closeZoom() {
+    this.isZoomed = false;
+    const imgElement = document.querySelector('.postImgCont');
+    if (imgElement) {
+      imgElement.classList.remove('zoomed');
     }
   }
 

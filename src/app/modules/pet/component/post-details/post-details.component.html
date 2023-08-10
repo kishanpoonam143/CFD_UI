@@ -1,10 +1,14 @@
 <div class="container-center bg">
-    <div class="spinner__loading" *ngIf="isLoading">
-      <div>
-        <mat-spinner></mat-spinner>
-      </div>
+  <div class="spinner__loading" *ngIf="isLoading">
+    <div>
+      <mat-spinner></mat-spinner>
     </div>
-    <div class="flex gap-2 p-3" *ngIf="!isLoading">
+  </div>
+  <div class="pd-3" *ngIf="!isLoading">
+    <button class="back-btn" (click)="goBack()">
+      <span class="material-icons-outlined"> chevron_left </span>Back
+    </button>
+    <div class="flex gap-2 pt-3" *ngIf="!isLoading">
       <mat-card class="border-1 mb-2 block img-mat-card">
         <div class="pg-card">
           <span
@@ -107,6 +111,5 @@
         </mat-card-content>
       </mat-card>
     </div>
-    <div></div>
   </div>
-  
+</div>

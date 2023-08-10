@@ -7,7 +7,10 @@
     <span class="material-icons-outlined"> keyboard_double_arrow_up </span>
     Back to Top
   </button>
-  <mat-card class="example-card" *ngFor="let card of paginatedCards">
+  <mat-card
+    class="example-card"
+    *ngFor="let card of paginatedCards; let isFirst = first"
+  >
     <a
       class="custom-link"
       [routerLink]="
@@ -15,12 +18,24 @@
       "
       target="_self"
     >
-      <img
-        mat-card-image
-        [src]="getCardImageURL(card)"
-        alt="{{ card?.title }}"
-        class="card-image"
-      />
+      <div class="post-image">
+        <img
+          mat-card-image
+          [src]="getCardImageURL(card)"
+          alt="{{ card?.title }}"
+          class="card-image"
+        />
+        <span class="ribbon-featured" *ngIf="isFirst && card?.isFeatured">
+          <strong class="ribbon">
+            <span class="hide-visually">This ad is</span>
+            Premium
+          </strong>
+        </span>
+        <div class="image-count">
+          <span class="material-icons"> photo_camera </span>
+          {{ imagesList.length }}
+        </div>
+      </div>
       <mat-card-title class="title">{{
         card?.price | currency : "INR"
       }}</mat-card-title>
@@ -31,9 +46,7 @@
           {{ card?.kmDriven ? card.kmDriven + " kms" : "" }}
         </p>
         <div class="loc-date">
-          <p class="loc">
-            {{ card?.nearBy }},{{ card?.city }} , {{ card?.state }}
-          </p>
+          <p class="loc">{{ card?.nearBy }}, {{ card?.city }}</p>
           <p class="date">{{ formatDate(card?.createdOn) }}</p>
         </div>
       </mat-card-content>

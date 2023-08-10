@@ -22,6 +22,8 @@ export class PostCardComponent implements OnInit {
     paginatedCards: any[] = [];
     mainCategories: any = [];
     mainCategory: any;
+    imageIndex: number = 0;
+    imagesList: any = [1];
     
     displayedCardCount: number = 16;
 
@@ -123,6 +125,7 @@ export class PostCardComponent implements OnInit {
             for (var j = 0; j < this.mainCategories.length; j++) {
                 if (cards[i].categoryId == this.mainCategories[j].id) {
                     cards[i].mainCategory = this.mainCategories[j].categoryName;
+                    cards[i].isFeatured = i === 0;
                     break;
                 }
             }

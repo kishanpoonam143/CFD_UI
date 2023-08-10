@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ApplianceService } from '../../service/appliance.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 
 @Component({
@@ -26,7 +26,7 @@ export class PostDetailsComponent {
   ];
   itemsPerPage = 4;
   currentPage = 0;
-  constructor(private electronicApplianceService: ApplianceService,private route: ActivatedRoute) { }
+  constructor(private electronicApplianceService: ApplianceService,private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     var tableRefGuid;
@@ -37,6 +37,16 @@ export class PostDetailsComponent {
       this.getElectronicAppliancePost(tableRefGuid);
     }
   }
+
+    goBack() {
+    this.router.navigate(['/Electronics & Appliances/view-posts'], {
+      queryParams: {
+        type: 'Appliances',
+        sub: 30
+      }
+    });
+  }
+
   getElectronicAppliancePost(guid: any) {
     this.electronicApplianceService.getElectronicAppliancePostByGuid(guid).subscribe((data: any) => {
       this.postDetails = data[0];

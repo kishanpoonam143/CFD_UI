@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
 import { PetService } from '../../service/pet.service';
 import { ActivatedRoute } from '@angular/router';
 import { CommonService } from 'src/app/shared/service/common.service';
@@ -6,7 +6,8 @@ import { CommonService } from 'src/app/shared/service/common.service';
 @Component({
   selector: 'app-pet-posts',
   templateUrl: './pet-posts.component.html',
-  styleUrls: ['./pet-posts.component.css']
+  styleUrls: ['./pet-posts.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class PetPostsComponent {
 

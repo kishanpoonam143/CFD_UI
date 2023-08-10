@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { SportService } from '../../service/sport.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 
 @Component({
   selector: 'app-post-details',
   templateUrl: './post-details.component.html',
-  styleUrls: ['./post-details.component.css']
+  styleUrls: ['./post-details.component.css',  '../../../module.component.css']
 })
 export class PostDetailsComponent {
 
@@ -26,7 +26,7 @@ export class PostDetailsComponent {
   ];
   itemsPerPage = 4;
   currentPage = 0;
-  constructor(private sportService: SportService, private route: ActivatedRoute) { }
+  constructor(private sportService: SportService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     var tableRefGuid;
@@ -36,6 +36,15 @@ export class PostDetailsComponent {
     if (tableRefGuid != null) {
       this.getSportPost(tableRefGuid);
     }
+  }
+
+  goBack() {
+    this.router.navigate(['/Sports & Hobbies/view-posts'], {
+      queryParams: {
+        type: 'Sport',
+        sub: 44
+      }
+    });
   }
   getSportPost(guid: any) {
     this.sportService.getSportPostByGuid(guid).subscribe((data: any) => {

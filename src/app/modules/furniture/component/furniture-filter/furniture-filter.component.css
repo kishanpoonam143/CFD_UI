@@ -57,6 +57,31 @@
   }
 
   /* Chagnes Made By Hamza */
+
+  .filters-head{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 15px;
+    margin-right: 5px;
+  }
+  
+  .filter-heading{
+    font-size: 18px;
+    font-weight: 500;
+    color: #0d475c;
+  }
+  
+  .clear-filters{
+    color: #2874F0;
+    font-size: 15px;
+    font-weight: 500;
+  }
+  
+  
+  .clear-filters:hover{
+    cursor: pointer;
+  }
   
   .sidebar-container::-webkit-scrollbar {
   display: none;
@@ -85,3 +110,7 @@
   margin-top: 15px; 
   }
 
+
+  .filterSepreator{
+    margin-top: -10px;
+  }

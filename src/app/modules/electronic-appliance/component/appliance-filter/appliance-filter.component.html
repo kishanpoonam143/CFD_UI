@@ -1,5 +1,16 @@
-<div class="grid">
-  <div class="sidebar-container">
+<div class="grid sidebar-container">
+  <div class="">
+    <div class="filters-head">
+      <div class="filter-heading">Filters</div>
+      <div
+        class="clear-filters"
+        *ngIf="filtersSelected && appliedFilters.length > 0"
+        (click)="clearFilters()"
+      >
+        Reset
+      </div>
+      <iframe id="hiddenFrame" style="display: none"></iframe>
+    </div>
     <!-- Price Range Filter -->
     <div>
       <div class="selected-states-container">
@@ -16,6 +27,7 @@
       </div>
     </div>
     <br />
+    <hr class="filterSepreator" />
     <!-- Location Filter -->
     <mat-form-field appearance="fill" class="form-field-w-100">
       <mat-label>State</mat-label>
