@@ -37,7 +37,7 @@
             <div class="progs" *ngIf="progress">
                 <h5>Upload Progress</h5>
                 <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-                </div>
+            </div>
             <div class="cards">
                 <ul class="upld">
                     <li class="upload-card" *ngFor="let item of cardsCount;let i=index">
@@ -54,6 +54,9 @@
                                 <button class="delete-button" (click)="deleteBackgroundImage(i)">
                                     <span class="delete-icon">&#10006;</span>
                                 </button>
+                                <div class="first-image" *ngIf="i === 0 && firstImageUploaded">
+                                    <div class="cover-tag">Cover Photo</div>
+                                  </div>
                                 <img [src]="item" height="100px" width="100px" alt="">
                             </div>
                         </div>
@@ -65,8 +68,7 @@
             <h4 class="loc">CONFIRM YOUR LOCATION</h4>
             <mat-form-field>
                 <mat-label>Pincode</mat-label>
-                <input matInput placeholder="Enter your pincode"
-                    (input)="getAddress($event); allowOnlyNumbers($event)"
+                <input matInput placeholder="Enter your pincode" (input)="getAddress($event); allowOnlyNumbers($event)"
                     [(ngModel)]="commonPayload.pincode" maxlength="6">
             </mat-form-field>
             <mat-form-field *ngIf="commonPayload.state != ''">

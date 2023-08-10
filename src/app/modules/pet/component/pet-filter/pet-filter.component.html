@@ -10,7 +10,7 @@
     </div>
     <br />
     <!-- Location Filter -->
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" class="form-field-w-100">
         <mat-label>State</mat-label>
         <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="stateControl"
             [matAutocomplete]="state">
@@ -23,7 +23,7 @@
         </mat-autocomplete>
     </mat-form-field>
 
-    <mat-form-field appearance="fill" *ngIf="filterObj?.state">
+    <mat-form-field appearance="fill" class="form-field-w-100" *ngIf="filterObj?.state">
         <mat-label>City</mat-label>
         <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="cityControl"
             [matAutocomplete]="city">
@@ -36,7 +36,7 @@
         </mat-autocomplete>
     </mat-form-field>
 
-    <mat-form-field appearance="fill" *ngIf="filterObj?.city">
+    <mat-form-field appearance="fill" class="form-field-w-100" *ngIf="filterObj?.city">
         <mat-label>Near By</mat-label>
         <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="nearByControl"
             [matAutocomplete]="nearBy">
@@ -60,6 +60,6 @@
             <input matSliderStartThumb [(ngModel)]="fromPrice">
             <input matSliderEndThumb [(ngModel)]="toPrice">
         </mat-slider>
-        <button class="post" mat-raised-button color="primary" (click)="priceChange()">Apply</button>
+        <button class="post ml-8" mat-raised-button color="primary" (click)="priceChange()">Apply</button>
     </div>
 </div>
