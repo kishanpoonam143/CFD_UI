@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { PetService } from '../../service/pet.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 
 @Component({
@@ -26,7 +26,7 @@ export class PostDetailsComponent {
   ];
   itemsPerPage = 4;
   currentPage = 0;
-  constructor(private petService: PetService, private route: ActivatedRoute) { }
+  constructor(private petService: PetService, private route: ActivatedRoute, private router: Router,) { }
 
   ngOnInit() {
     var tableRefGuid;
@@ -36,6 +36,15 @@ export class PostDetailsComponent {
     if (tableRefGuid != null) {
       this.getSportPost(tableRefGuid);
     }
+  }
+
+  goBack() {
+    this.router.navigate(['/Pets/view-posts'], {
+      queryParams: {
+        type: 'Pet',
+        sub: 48
+      }
+    });
   }
   getSportPost(guid: any) {
     this.petService.getPetPostByGuid(guid).subscribe((data: any) => {

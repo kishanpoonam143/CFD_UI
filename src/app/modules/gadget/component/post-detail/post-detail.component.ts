@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import * as moment from 'moment';
 import { GadgetService } from '../../service/gadget.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-detail',
@@ -26,7 +26,7 @@ export class PostDetailComponent {
   ];
   itemsPerPage = 4;
   currentPage = 0;
-  constructor(private gadgetService: GadgetService,private route: ActivatedRoute) { }
+  constructor(private gadgetService: GadgetService,private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     var tableRefGuid;
@@ -36,6 +36,15 @@ export class PostDetailComponent {
     if (tableRefGuid != null) {
       this.getGadgetPost(tableRefGuid);
     }
+  }
+
+  goBack() {
+    this.router.navigate(['/Gadgets/view-posts'], {
+      queryParams: {
+        type: 'Gadget',
+        sub: 1
+      }
+    });
   }
   getGadgetPost(guid: any) {
     this.gadgetService.getGadgetPostByGuid(guid).subscribe((data: any) => {

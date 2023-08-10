@@ -36,6 +36,11 @@ export class SportFilterComponent {
   @ViewChild('nearByMatAutocomplete') nearByAutocomplete!: MatAutocomplete;
   @ViewChild(MatSelectionList)
   matSelectionList!: MatSelectionList;
+
+  //Changes made by Hamza
+  filtersSelected: boolean = false; 
+  initialFilters: any;
+
   constructor(private commonService: CommonService, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -61,6 +66,11 @@ export class SportFilterComponent {
       this.appliedFilters = this.appliedFilters.filter((item: any) => (item.name != 'city' && item.name != 'nearBy'));
     else
       this.getCities(event.option.value.id);
+
+    this.filtersSelected = true; //Changes made by Hamza
+    this.filterObj.state = event.option.value ? event.option.value.name : null;
+    this.filterObj.city = null; // Reset city when state changes
+    this.filterObj.nearBy = null; // Reset nearby when state changes
   }
   getCities(stateId: Number) {
     this.commonService.getCitiesByState(stateId).subscribe(data => {
@@ -76,11 +86,14 @@ export class SportFilterComponent {
       this.appliedFilters = this.appliedFilters.filter((item: any) => (item.name != 'nearBy'));
     else
       this.getNearByPlaces(event.option.value.id);
+
+    this.filtersSelected = true; //Changes made by Hamza
   }
   onNearByChange(event: any) {
     this.filterObj.nearBy = (event.option.value == null) ? null : event.option.value.name;
     this.updateAppliedFilters("nearBy", this.filterObj.nearBy);
     this.commonService.setData(this.filterObj);
+    this.filtersSelected = true; //Changes made by Hamza
   }
   priceChange() {
     let prices = [];
@@ -89,6 +102,7 @@ export class SportFilterComponent {
     this.filterObj.price = prices;
     this.commonService.setData(this.filterObj);
     this.updateAppliedFilters("price", this.formatAmount(this.fromPrice) + " - " + this.formatAmount(this.toPrice));
+    this.filtersSelected = true; //Changes made by Hamza
   }
   removeItem(item: any): void {
     if (item.name == 'state') {
@@ -186,6 +200,20 @@ export class SportFilterComponent {
       select.writeValue(selectedOptions);
     }
   }
+
+  clearFilters() {
+    this.resetFilters();
+    this.filtersSelected = false;
+    this.stateControl.patchValue("");
+    this.cityControl.patchValue("");
+    this.nearByControl.patchValue("");
+    this.fromPrice = 0;
+    this.toPrice = 0;
+    this.filterObj = { ...this.initialFilters }; // Reset to initial filters
+    this.appliedFilters = [];
+    window.location.reload();
+  }
+
 
   resetFilters() {
     this.stateControl.patchValue("");
