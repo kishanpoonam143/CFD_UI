@@ -378,9 +378,24 @@
             <a class="dropdown-toggle">Fashion</a>
           </div>
           <ul class="dropdown-menu">
-            <li><a>Men</a></li>
-            <li><a>Women</a></li>
-            <li><a>Kids</a></li>
+            <li>
+              <a [routerLink]="'/Fashion/view-posts'" [queryParams]="{
+                  type: 'Fashion',
+                  sub: fashionTypes.Men
+                }">Men</a>
+            </li>
+            <li>
+              <a [routerLink]="'/Fashion/view-posts'" [queryParams]="{
+                  type: 'Fashion',
+                  sub: fashionTypes.Women
+                }">Women</a>
+            </li>
+            <li>
+              <a [routerLink]="'/Fashion/view-posts'" [queryParams]="{
+                  type: 'Fashion',
+                  sub: fashionTypes.Kids
+                }">Kids</a>
+            </li>
           </ul>
         </li>
         <li class="dropdown auto-pointer-events">
