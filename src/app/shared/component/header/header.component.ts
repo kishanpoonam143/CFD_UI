@@ -11,6 +11,7 @@ import { FurnitureType } from '../../enum/FurnitureType';
 import { MatIconModule } from '@angular/material/icon';
 import { SportType } from '../../enum/SportType';
 import { PetType } from '../../enum/PetType';
+import { FashionType } from '../../enum/FashionType';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -25,6 +26,7 @@ export class HeaderComponent implements OnInit {
   furnitureTypes = FurnitureType;
   sportTypes = SportType;
   petTypes = PetType;
+  fashionTypes  = FashionType;
   isUserLogedIn: boolean = false;
   userData: any;
   imageUrl: string = "https://icon-library.com/images/default-profile-icon/default-profile-icon-24.jpg";
