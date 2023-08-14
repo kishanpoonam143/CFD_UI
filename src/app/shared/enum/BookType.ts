@@ -1,8 +1,8 @@
 export enum BookType{
-    ScienceAndTechnology = 1,
-    BusinessAndManagement = 2,
-    SchoolAndCollege = 3,
-    Competative = 4,
-    Art = 5,
-    Others = 6
+    ScienceAndTechnology = 43,
+    BusinessAndManagement = 44,
+    SchoolAndCollege = 45,
+    Competative = 46,
+    Art = 47,
+    Others = 48
 }
