@@ -300,12 +300,42 @@
             <a class="dropdown-toggle">Books</a>
           </div>
           <ul class="dropdown-menu">
-            <li><a>Science & Technology</a></li>
-            <li><a>Business & Management</a></li>
-            <li><a>School & College</a></li>
-            <li><a>Competative</a></li>
-            <li><a>Art</a></li>
-            <li><a>Others</a></li>
+            <li>
+              <a [routerLink]="'/Books/view-posts'" [queryParams]="{
+                  type: 'Book',
+                  sub: bookTypes.ScienceAndTechnology
+                }">Science & Technology</a>
+            </li>
+            <li>
+              <a [routerLink]="'/Books/view-posts'" [queryParams]="{
+                  type: 'Book',
+                  sub: bookTypes.BusinessAndManagement
+                }">Business & Management</a>
+            </li>
+            <li>
+              <a [routerLink]="'/Books/view-posts'" [queryParams]="{
+                  type: 'Book',
+                  sub: bookTypes.SchoolAndCollege
+                }">School & College</a>
+            </li>
+            <li>
+              <a [routerLink]="'/Books/view-posts'" [queryParams]="{
+                  type: 'Book',
+                  sub: bookTypes.Competative
+                }">Competative</a>
+            </li>
+            <li>
+              <a [routerLink]="'/Books/view-posts'" [queryParams]="{
+                  type: 'Book',
+                  sub: bookTypes.Art
+                }">Art</a>
+            </li>
+            <li>
+              <a [routerLink]="'/Books/view-posts'" [queryParams]="{
+                  type: 'Book',
+                  sub: bookTypes.Others
+                }">Others</a>
+            </li>
           </ul>
         </li>
         <li class="dropdown auto-pointer-events">
