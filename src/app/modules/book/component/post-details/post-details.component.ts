@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FashionService } from '../../service/fashion.service';
+import { BookService } from '../../service/book.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 
@@ -26,7 +26,7 @@ export class PostDetailsComponent {
   ];
   itemsPerPage = 4;
   currentPage = 0;
-  constructor(private fashionService: FashionService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private bookService: BookService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     var tableRefGuid;
@@ -39,18 +39,18 @@ export class PostDetailsComponent {
   }
 
   goBack() {
-    this.router.navigate(['/Fashion/view-posts'], {
+    this.router.navigate(['/Books/view-posts'], {
       queryParams: {
-        type: 'Fashion',
-        sub: 52
+        type: 'Book',
+        sub: 43
       }
     });
   }
   getSportPost(guid: any) {
-    this.fashionService.getFashionPostByGuid(guid).subscribe((data: any) => {
+    this.bookService.getBookPostByGuid(guid).subscribe((data: any) => {
       this.postDetails = data[0];
       this.isLoading = false;
-      this.imagesList = this.postDetails.fashionImageList;
+      this.imagesList = this.postDetails.bookImageList;
     });
   }
   formatDate(date: any): any {

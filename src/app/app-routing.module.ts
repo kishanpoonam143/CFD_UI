@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'Sports & Hobbies', loadChildren: () => import('./modules/sport/sport.module').then(m => m.SportModule) },
   { path: 'Pets', loadChildren: () => import('./modules/pet/pet.module').then(m => m.PetModule) },
   { path: 'Fashion', loadChildren: () => import('./modules/fashion/fashion.module').then(m => m.FashionModule) },
+  { path: 'Books', loadChildren: () => import('./modules/book/book.module').then(m => m.BookModule) },
   { path : '', component : DashboardComponent},
   { path : 'post-menu', component : PostMenuComponent,canActivate: [AuthGuard]}
 
