@@ -11,6 +11,7 @@ import { MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 import { UserModule } from './modules/user/user.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './modules/auth/interceptor/JwtInterceptor';
+import { HashLocationStrategy, LocationStrategy  } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,9 @@ import { JwtInterceptor } from './modules/auth/interceptor/JwtInterceptor';
     MatProgressSpinnerModule,
     SharedModule,
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }, 
+    {provide : LocationStrategy , useClass: HashLocationStrategy}],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }
