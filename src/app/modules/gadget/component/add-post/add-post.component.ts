@@ -2,7 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, map, startWith } from 'rxjs';
 import { UserService } from 'src/app/modules/user/service/user.service';
 import { Common } from 'src/app/shared/model/CommonPayload';
@@ -35,7 +35,7 @@ export class AddPostComponent {
   firstImageUploaded: boolean = false; // Changes made by Hamza
 
   constructor(private gadgetService: GadgetService, private commonService: CommonService, private snackBar: MatSnackBar, private route: ActivatedRoute,
-    @Inject(DOCUMENT) private document: Document, private userService: UserService) { }
+    @Inject(DOCUMENT) private document: Document, private userService: UserService,private router : Router) { }
 
   ngOnInit() {
     this.getUserData();
@@ -198,6 +198,7 @@ export class AddPostComponent {
       this.gadgetService.saveGadgetPost(payload).subscribe(data => {
         this.showNotification("Post added succesfully");
         console.log(data);
+        this.router.navigateByUrl('/post-menu');
       });
   }
   addSpecificPayload(commonPayload: any): any {

@@ -12,4 +12,16 @@ export class Filter{
     fuelType : number[] | null =null;
     transmissionType : number[] | null =null;
     year : number[] | null =null;
+
+    bedrooms : number | null = null;
+    bathrooms : number | null = null;
+    furnishingStatus : number[] | null = null;
+    listedBy : number[] | null = null;
+    houseType : number[] | null = null;
+    serviceType : number[] | null = null;
+    pgType : number[] | null = null;
+    constructionStatus : number[] | null = null;
+    superBuildUpArea : number[] | null = null;
+    plotArea : number[] | null = null;
+    bachelorAllowed : boolean | null = null;
 }

@@ -3,13 +3,18 @@ import { Component, Inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, map, startWith } from 'rxjs';
+import { Observable } from 'rxjs';
 import { UserService } from 'src/app/modules/user/service/user.service';
-import { FuelType } from 'src/app/shared/enum/FuelType';
-import { TransmissionType } from 'src/app/shared/enum/TransmissionType';
+import { ConstructionStatus } from 'src/app/shared/enum/ConstructionStatus';
+import { FacingType } from 'src/app/shared/enum/FacingType';
+import { FurnishingStatus } from 'src/app/shared/enum/FurnishingStatus';
+import { HouseType } from 'src/app/shared/enum/HouseType';
+import { ListedBy } from 'src/app/shared/enum/ListBy';
 import { Common } from 'src/app/shared/model/CommonPayload';
 import { CommonService } from 'src/app/shared/service/common.service';
-import { VehicleService } from '../../service/vehicle.service';
+import { PropertyService } from '../../service/property.service';
+import { ServiceType } from 'src/app/shared/enum/ServiceType';
+import { PGType } from 'src/app/shared/enum/PGType';
 
 @Component({
   selector: 'app-add-post',
@@ -32,27 +37,67 @@ export class AddPostComponent {
   mainCategory: string = '';
   selectedFuelType: string = "";
   currentUploadImageIndex: number = 0;
-  fuelTypes = Object.keys(FuelType).map((key: any) => ({
+  houseTypes = Object.keys(HouseType).map((key: any) => ({
     label: key,
-    id: FuelType[key],
+    id: HouseType[key],
   }));
-  transmissionTypes = Object.keys(TransmissionType).map((key: any) => ({
+  furnishingStatus = Object.keys(FurnishingStatus).map((key: any) => ({
     label: key,
-    id: TransmissionType[key],
+    id: FurnishingStatus[key],
   }));
-  numberOfOwners = [1, 2, 3, 4];
+  constructionStatus = Object.keys(ConstructionStatus).map((key: any) => ({
+    label: key,
+    id: ConstructionStatus[key],
+  }));
+  listedBy = Object.keys(ListedBy).map((key: any) => ({
+    label: key,
+    id: ListedBy[key],
+  }));
+  facingTypes = Object.keys(FacingType).map((key: any) => ({
+    label: key,
+    id: FacingType[key],
+  }));
+  serviceTypes = Object.keys(ServiceType).map((key: any) => ({
+    label: key,
+    id: ServiceType[key],
+  }));
+  pgTypes = Object.keys(PGType).map((key: any) => ({
+    label: key,
+    id: PGType[key],
+  }));
+  bachelorsAllowed = [{ label: 'No', value: false }, { label: 'Yes', value: true }];
+  mealsIncluded = [{ label: 'No', value: false }, { label: 'Yes', value: true }];
+  numberOfBedRooms = [1, 2, 3, 4];
+  numberOfBathRooms = [1, 2, 3, 4];
+  carParking = [1, 2, 3, 4];
   selectedFuel: string = "";
   selectedTransmission: any;
   selectedOwnerNumber: Number = 0;
   allUploadedFiles: any = [];
   brandId: any;
   progress: boolean = false;
-  vehicleData: any = {
-    fuelType: 0,
-    transmissionType: 0,
-    noOfOwner: 0,
-    kmDriven: 0,
-    year: 0
+  propertyData: any = {
+    houseType: 0,
+    serviceType: 0,
+    bedrooms: 0,
+    bathrooms: 0,
+    furnishingStatus: 0,
+    constructionStatus: 0,
+    listedBy: 0,
+    superBuildUpArea: 0,
+    carpetArea: 0,
+    bachelorAllowed: true,
+    maintenanceCharge: 0,
+    totalFloors: 0,
+    floorNumber: 0,
+    carParking: 0,
+    facingType: 0,
+    projectName: "",
+    plotArea: 0,
+    lenght: 0, // spll misatake
+    breadth: 0,
+    isMealIncluded: true,
+    pgType: 0
   }
   userData: any;
   imageUrl: string = '../../../../../assets/img_not_available.png';
@@ -60,51 +105,60 @@ export class AddPostComponent {
   carModelId: any;
 
   firstImageUploaded: boolean = false; // Changes made by Hamza
+  houseApartmentsSale = ['HouseType', 'Bedrooms', 'Bathrooms', 'Furnishing', 'Construction Status', 'Listed by', 'Super Builtup area', 'Carpet Area', 'Maintenance', 'Total Floors', 'Floor No', 'Car Parking', 'Facing', 'Project Name'];
+  houseApartmentsRent = ['HouseType', 'Bedrooms', 'Bathrooms', 'Furnishing', 'Construction Status', 'Listed by', 'Super Builtup area', 'Carpet Area', 'Bachelors Allowed', 'Maintenance', 'Total Floors', 'Floor No', 'Car Parking', 'Facing', 'Project Name'];
+  landsAndPlots = ['ServiceType', 'Listed by', 'Plot Area', 'Length', 'Breadth', 'Facing', 'Project Name'];
+  shopsAndOfcRent = ['Furnishing', 'Listed by', 'Super Builtup area', 'Carpet Area', 'Maintenance', 'Car Parking', 'Bathrooms', 'Project Name'];
+  shopsAndOfcSale = ['Furnishing', 'Construction Status', 'Listed by', 'Super Builtup area', 'Carpet Area', 'Maintenance', 'Car Parking', 'Bathrooms', 'Project Name'];
+  pgAndGuestHouses = ['SubType', 'Furnishing', 'Listed by', 'Car Parking', 'Meals Included'];
+  fieldsToShow: any = [];
 
-  constructor(private vehicleService: VehicleService, private commonService: CommonService, private snackBar: MatSnackBar, private route: ActivatedRoute,
+  constructor(private propertyService: PropertyService, private commonService: CommonService, private snackBar: MatSnackBar, private route: ActivatedRoute,
     @Inject(DOCUMENT) private document: Document, private userService: UserService,private router : Router) { }
 
   ngOnInit() {
     this.getUserData();
-    this.fuelTypes = this.fuelTypes.slice(this.fuelTypes.length / 2);
-    this.transmissionTypes = this.transmissionTypes.slice(this.transmissionTypes.length / 2);
+    this.houseTypes = this.houseTypes.slice(this.houseTypes.length / 2);
+    this.furnishingStatus = this.furnishingStatus.slice(this.furnishingStatus.length / 2);
+    this.constructionStatus = this.constructionStatus.slice(this.constructionStatus.length / 2);
+    this.facingTypes = this.facingTypes.slice(this.facingTypes.length / 2);
+    this.listedBy = this.listedBy.slice(this.listedBy.length / 2);
+    this.serviceTypes = this.serviceTypes.slice(this.serviceTypes.length / 2);
+    this.pgTypes = this.pgTypes.slice(this.pgTypes.length / 2);
     for (var i = 0; i < this.cardsCount.length; i++) {
       this.cardsCount[i] = "";
     }
     this.route.queryParams.subscribe(params => {
-      this.subCategory = params['sub'];
-      this.mainCategory = params['main'];
-      this.setCategoryId();
+      this.subCategory = params['sub'].replaceAll("%20", "");
       switch (this.subCategory) {
-        case "Cars": {
-          this.getCarBrands();
+        case 'For Sale: Houses & Apartments': {
+          this.fieldsToShow = this.houseApartmentsSale;
           break;
         }
-        case "Bikes": {
-          this.getBikeBrands();
+        case 'For Rent: Houses & Apartments': {
+          this.fieldsToShow = this.houseApartmentsRent;
           break;
         }
-        case "Scooty": {
-          this.getScootyBrands();
+        case 'Lands & Plot': {
+          this.fieldsToShow = this.landsAndPlots;
           break;
         }
-        case "Bicycle": {
-          this.getBicycleBrands();
+        case 'For Rent: Shop & Offices': {
+          this.fieldsToShow = this.shopsAndOfcRent;
+          break;
+        }
+        case 'For Sale: Shops & Offices': {
+          this.fieldsToShow = this.shopsAndOfcSale;
+          break;
+        }
+        case 'PG & Guest Houses': {
+          this.fieldsToShow = this.pgAndGuestHouses;
           break;
         }
       }
+      this.mainCategory = params['main'];
+      this.setCategoryId();
     });
-  }
-
-  filterBrands(value: any): { id: number; brandName: string }[] {
-    var filterValue = "";
-    if (typeof value == 'object')
-      filterValue = value.brandName.toLowerCase();
-    else
-      filterValue = value.toLowerCase();
-    return this.brands.filter(
-      (brand: any) => brand.brandName.toLowerCase().indexOf(filterValue) === 0
-    );
   }
   allowOnlyNumbers(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
@@ -128,7 +182,7 @@ export class AddPostComponent {
     for (let i = 0; i < files.length; i++) {
       formData.append("files", files[i]);
     }
-    this.vehicleService.uploadVehicleImages(formData).subscribe((data: any) => {
+    this.propertyService.uploadPropertyImages(formData).subscribe((data: any) => {
       this.progress = false;
       let imagesLength = data.length;
       let dataIndex = 0;
@@ -165,7 +219,7 @@ export class AddPostComponent {
     this.commonPayload.name = this.userData.firstName;
     this.commonPayload.mobile = this.userData.mobileNo;
     var payload = this.addSpecificPayload(this.commonPayload);
-    this.saveVehiclePost(payload);
+    this.savePropertyPost(payload);
   }
   getAddress(event: any) {
     let pincode = event.target.value;
@@ -187,35 +241,41 @@ export class AddPostComponent {
       verticalPosition: 'top'
     });
   }
-  selectFuelType(fuel: any) {
-    this.selectedFuel = fuel.label;
-    this.vehicleData.fuelType = fuel.id;
+  selectHouseType(house: any) {
+    this.propertyData.houseType = house.id;
   }
-  selectTransmission(transmission: any) {
-    this.selectedTransmission = transmission.label;
-    this.vehicleData.transmissionType = transmission.id;
+  selectFurnishing(furnishing: any) {
+    this.propertyData.furnishingStatus = furnishing.id;
   }
-  selectOwnerNumber(ownerNumber: Number) {
-    this.selectedOwnerNumber = ownerNumber;
-    this.vehicleData.noOfOwner = ownerNumber;
+  selectBedRoomNumber(bedRoomNumber: Number) {
+    this.propertyData.bedrooms = bedRoomNumber;
   }
-  getCarBrands() {
-    this.vehicleService.getCarBrands().subscribe(data => {
-      this.brands = data;
-      this.getFilteredBrands();
-    });
+  selectBathRoomNumber(bathRoomNumber: Number) {
+    this.propertyData.bathrooms = bathRoomNumber;
   }
-  getBikeBrands() {
-    this.vehicleService.getBikeBrands().subscribe(data => {
-      this.brands = data;
-      this.getFilteredBrands();
-    });
+  selectConstructionStatus(constructionStatus: any) {
+    this.propertyData.constructionStatus = constructionStatus.id;
   }
-  getFilteredBrands() {
-    this.filteredBrands = this.brandControl.valueChanges.pipe(
-      startWith(""),
-      map((value) => this.filterBrands(value || ""))
-    );
+  selectListBy(listBy: any) {
+    this.propertyData.listedBy = listBy.id;
+  }
+  selectCarParking(carParking: any) {
+    this.propertyData.carParking = carParking;
+  }
+  handleFacingType(facingType: any) {
+    this.propertyData.facingType = facingType.value.id;
+  }
+  selectBachelor(bachelorAllowed: any) {
+    this.propertyData.bachelorAllowed = bachelorAllowed.value;
+  }
+  selectServiceType(serviceType:any){
+    this.propertyData.serviceType = serviceType.id;
+  }
+  selectPgType(pgType:any){
+    this.propertyData.pgType = pgType.id;
+  }
+  selectMeal(mealIncluded:any){
+    this.propertyData.isMealIncluded = mealIncluded.value;
   }
   setSubCategory() {
     this.commonService.getSubCategoryByCategoryId(this.commonPayload.categoryId).subscribe((data: any) => {
@@ -239,49 +299,27 @@ export class AddPostComponent {
     });
   }
   addSpecificPayload(commonPayload: any): any {
-    var imageList: { vehiclesId: number; imageId: string; imageURL: any; }[] = [];
+    commonPayload.superBuildUpArea = Number(commonPayload.superBuildUpArea);
+    commonPayload.carpetArea = Number(commonPayload.carpetArea);
+    commonPayload.maintenanceCharge = Number(commonPayload.maintenanceCharge);
+    commonPayload.superBuildUpArea = Number(commonPayload.superBuildUpArea);
+    var imageList: { propertyId: number; imageId: string; imageURL: any; }[] = [];
     this.cardsCount.forEach(imageURL => {
       if (imageURL != "")
-        imageList.push({ "vehiclesId": 0, "imageId": "100", "imageURL": imageURL });
+        imageList.push({ "propertyId": 0, "imageId": "100", "imageURL": imageURL });
     });
-    var payload = Object.assign({}, commonPayload, this.vehicleData, {
-      vehicleImageList: imageList,
-      vehicelBrandId: this.brandId,
+    var payload = Object.assign({}, commonPayload, this.propertyData, {
+      propertyImageList: imageList,
     });
     return payload;
   }
-  handleBrand(data: any) {
-    this.brandId = data.id;
-    this.getCarModels(data.id);
-  }
-  displayBrand(brand: any): string {
-    return brand.brandName || "";
-  }
-  getScootyBrands() {
-    this.vehicleService.getScootyBrands().subscribe(data => {
-      this.brands = data;
-      this.getFilteredBrands();
-    })
-  }
-  getBicycleBrands() {
-    this.vehicleService.getBicycleBrands().subscribe(data => {
-      this.brands = data;
-      this.getFilteredBrands();
-    })
-  }
-  saveVehiclePost(payload: any) {
+  savePropertyPost(payload: any) {
     if (this.validatePostForm(payload))
-      this.vehicleService.saveVehiclePost(payload).subscribe(data => {
+      this.propertyService.savePropertyPost(payload).subscribe(data => {
         this.showNotification("Post added succesfully");
         console.log(data);
         this.router.navigateByUrl('/post-menu');
       });
-  }
-  onYearChangeEvent(event: any) {
-    this.vehicleData.year = event.target.value;
-  }
-  onKmsChangeEvent(event: any) {
-    this.vehicleData.kmDriven = event.target.value;
   }
   getUserData() {
     let userId = localStorage.getItem('id');
@@ -328,41 +366,13 @@ export class AddPostComponent {
       this.showNotification("price is rerquired");
     else if (payload.price < 10 || payload.price > 1000000)
       this.showNotification("price should be min 10 and max 1000000");
-    else if (payload.vehicleImageList.length <= 0)
+    else if (payload.propertyImageList.length <= 0)
       this.showNotification("In upload photo, at least 1 photo is required.");
     else if (payload.pincode.length < 6)
       this.showNotification("Pincode should be 6 digits");
     else
       flag = true;
     return flag;
-  }
-  getCarModels(brandId: Number) {
-    this.vehicleService.getCarModels(brandId).subscribe(res => {
-      this.carModels = res;
-      this.getFilteredModels();
-    });
-  }
-  getFilteredModels() {
-    this.filteredModels = this.modelControl.valueChanges.pipe(
-      startWith(""),
-      map((value) => this.filterModels(value || ""))
-    );
-  }
-  filterModels(value: any): { id: number; model: string }[] {
-    var filterValue = "";
-    if (typeof value == 'object')
-      filterValue = value.model.toLowerCase();
-    else
-      filterValue = value.toLowerCase();
-    return this.carModels.filter(
-      (model: any) => model.model.toLowerCase().indexOf(filterValue) === 0
-    );
-  }
-  displayModel(model: any): string {
-    return model?.model || "";
-  }
-  handleModel(data: any) {
-    this.carModelId = data.id;
   }
   selectProfilePicture() {
     if (this.document) {
@@ -371,5 +381,12 @@ export class AddPostComponent {
         uploadElement.click();
       }
     }
+  }
+  allowOnlyNumbersInInput(event: Event, input: string): void {
+    const inputElement = event.target as HTMLInputElement;
+    const inputValue = inputElement.value;
+    const numericInput = inputValue.replace(/[^0-9.-]/g, '');
+    inputElement.value = numericInput;
+    this.propertyData[input] = Number(numericInput);
   }
 }
