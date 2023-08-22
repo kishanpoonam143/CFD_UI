@@ -171,12 +171,42 @@
             <a class="dropdown-toggle">Properties</a>
           </div>
           <ul class="dropdown-menu">
-            <li><a>For Sale: Houses & Apartments</a></li>
-            <li><a>For Rent: Houses & Apartments</a></li>
-            <li><a>Lands & Plot</a></li>
-            <li><a>For Rent: Shop & Offices</a></li>
-            <li><a>For Sale: Shops & Offices</a></li>
-            <li><a>PG & Guest Houses</a></li>
+            <li>
+              <a [routerLink]="'/Properties/view-posts'" [queryParams]="{
+                  type: 'property',
+                  sub: propertyTypes.ForSaleHousesApartments
+                }">For Sale: Houses & Apartments</a>
+            </li>
+            <li>
+              <a [routerLink]="'/Properties/view-posts'" [queryParams]="{
+                  type: 'property',
+                  sub: propertyTypes.ForRentHousesApartments
+                }">For Rent: Houses & Apartments</a>
+            </li>
+            <li>
+              <a [routerLink]="'/Properties/view-posts'" [queryParams]="{
+                  type: 'property',
+                  sub: propertyTypes.LandsAndPlot
+                }">Lands & Plot</a>
+            </li>
+            <li>
+              <a [routerLink]="'/Properties/view-posts'" [queryParams]="{
+                  type: 'property',
+                  sub: propertyTypes.ForRentShopOffices
+                }">For Rent: Shop & Offices</a>
+            </li>
+            <li>
+              <a [routerLink]="'/Properties/view-posts'" [queryParams]="{
+                  type: 'property',
+                  sub: propertyTypes.ForSaleShopsOffices
+                }">For Sale: Shops & Offices</a>
+            </li>
+            <li>
+              <a [routerLink]="'/Properties/view-posts'" [queryParams]="{
+                  type: 'property',
+                  sub: propertyTypes.PGAndGuestHouses
+                }">PG & Guest Houses</a>
+            </li>
           </ul>
         </li>
         <li class="dropdown auto-pointer-events">

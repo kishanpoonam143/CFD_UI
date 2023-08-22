@@ -88,7 +88,6 @@ export class PostDetailComponent {
       this.imagesList = this.postDetails.vehicleImageList;
       this.fuelType = this.fuelTypes.filter(fuel => fuel.id == this.postDetails.fuelType);
       this.transmissionType = this.transmissionTypes.filter(transmission => transmission.id == this.postDetails.transmissionType);
-      console.log(this.transmissionType);
       this.isLoading = false;
     });
   }

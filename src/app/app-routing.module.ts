@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'Pets', loadChildren: () => import('./modules/pet/pet.module').then(m => m.PetModule) },
   { path: 'Fashion', loadChildren: () => import('./modules/fashion/fashion.module').then(m => m.FashionModule) },
   { path: 'Books', loadChildren: () => import('./modules/book/book.module').then(m => m.BookModule) },
+  { path: 'Properties', loadChildren: () => import('./modules/property/property.module').then(m => m.PropertyModule) },
   { path : '', component : DashboardComponent},
   { path : 'post-menu', component : PostMenuComponent,canActivate: [AuthGuard]}
 
