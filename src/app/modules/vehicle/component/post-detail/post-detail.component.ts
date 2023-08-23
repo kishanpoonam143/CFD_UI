@@ -77,7 +77,7 @@ export class PostDetailComponent {
     this.router.navigate(['/Vehicles/view-posts'], {
       queryParams: {
         type: 'Vehicle',
-        sub: 4
+        sub: 5
       }
     });
   }

@@ -42,7 +42,7 @@ export class PostDetailsComponent {
     this.router.navigate(['/Books/view-posts'], {
       queryParams: {
         type: 'Book',
-        sub: 43
+        sub: 48
       }
     });
   }

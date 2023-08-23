@@ -1,6 +1,6 @@
 export enum FurnitureType {
-    SofaAndDining = 39,
-    Beds = 40,
-    KidsFurniture = 41,
-    OtherHouseholdItems = 42,
+    SofaAndDining = 44,
+    Beds = 45,
+    KidsFurniture = 46,
+    OtherHouseholdItems = 47,
 }

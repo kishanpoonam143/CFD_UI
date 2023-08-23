@@ -1,7 +1,8 @@
 export enum VehicleType{
-    Car = 4,
-    Bike = 5,
-    Scooty = 6,
-    Bicycle = 7,
-    SpareParts = 8
+    Car = 5,
+    Bike = 6,
+    Scooty = 7,
+    Bicycle = 8,
+    SpareParts = 9,
+    Others = 10
 }

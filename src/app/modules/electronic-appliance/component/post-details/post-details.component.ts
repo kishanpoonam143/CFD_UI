@@ -42,7 +42,7 @@ export class PostDetailsComponent {
     this.router.navigate(['/Electronics & Appliances/view-posts'], {
       queryParams: {
         type: 'Appliances',
-        sub: 30
+        sub: 34
       }
     });
   }
