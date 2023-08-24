@@ -1,6 +1,10 @@
-import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { AddPostComponent } from './component/add-post/add-post.component';
+import { JobFilterComponent } from './component/job-filter/job-filter.component';
+import { JobPostsComponent } from './component/job-posts/job-posts.component';
+import { PostDetailsComponent } from './component/post-details/post-details.component';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,22 +22,20 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { AddPostComponent } from './component/add-post/add-post.component';
-import { GadgetFilterComponent } from './component/gadget-filter/gadget-filter.component';
-import { PostDetailComponent } from './component/post-detail/post-detail.component';
-import { GadgetRoutingModule } from './gadget-routing.module';
-import { GadgetPostsComponent } from './component/gadget-posts/gadget-posts.component';
+import { JobRoutingModule } from './job-routing.module';
+
+
 
 @NgModule({
   declarations: [
-    PostDetailComponent,
     AddPostComponent,
-    GadgetFilterComponent,
-    GadgetPostsComponent
+    JobFilterComponent,
+    JobPostsComponent,
+    PostDetailsComponent
   ],
   imports: [
     CommonModule,
-    GadgetRoutingModule,
+    JobRoutingModule,
     SharedModule,
     HttpClientModule,
     FormsModule,
@@ -56,4 +58,4 @@ import { GadgetPostsComponent } from './component/gadget-posts/gadget-posts.comp
     MatSliderModule,
   ]
 })
-export class GadgetModule { }
+export class JobModule { }

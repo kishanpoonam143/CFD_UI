@@ -42,7 +42,7 @@ export class PostDetailsComponent {
     this.router.navigate(['/Pets/view-posts'], {
       queryParams: {
         type: 'Pet',
-        sub: 48
+        sub: 58
       }
     });
   }

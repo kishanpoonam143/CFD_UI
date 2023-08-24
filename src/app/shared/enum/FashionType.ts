@@ -1,5 +1,5 @@
 export enum FashionType{
-    Men = 52,
-    Women = 53,
-    Kids = 54
+    Men = 62,
+    Women = 63,
+    Kids = 64
 }

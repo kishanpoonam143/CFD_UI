@@ -120,7 +120,7 @@ export class PostDetailsComponent {
     this.router.navigate(['/Properties/view-posts'], {
       queryParams: {
         type: 'Property',
-        sub: 9
+        sub: 11
       }
     });
   }

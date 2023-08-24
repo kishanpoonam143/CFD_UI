@@ -42,7 +42,7 @@ export class PostDetailsComponent {
     this.router.navigate(['/Sports & Hobbies/view-posts'], {
       queryParams: {
         type: 'Sport',
-        sub: 44
+        sub: 54
       }
     });
   }
