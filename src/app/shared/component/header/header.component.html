@@ -215,7 +215,18 @@
             <a class="dropdown-toggle">Jobs</a>
           </div>
           <ul class="dropdown-menu">
-            <li><a>Data Entry & Back Office</a></li>
+            <li>
+              <a [routerLink]="'/Jobs/view-posts'" [queryParams]="{
+                  type: 'job',
+                  sub: jobTypes.DataEntryAndBackOffice
+                }">Data Entry & Back Office</a>
+            </li>
+            <li>
+              <a [routerLink]="'/Jobs/view-posts'" [queryParams]="{
+                  type: 'job',
+                  sub: jobTypes.DataEntryAndBackOffice
+                }">Data Entry & Back Office</a>
+            </li>
             <li><a>Sales & Marketting</a></li>
             <li><a>BPO & Telecaller</a></li>
             <li><a>Driver</a></li>
