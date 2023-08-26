@@ -36,9 +36,11 @@
           {{ imagesList.length }}
         </div>
       </div>
-      <mat-card-title class="title">{{
+      <mat-card-title class="title" *ngIf="card?.price > 0">{{
         card?.price | currency : "INR"
       }}</mat-card-title>
+      <mat-card-title class="title" *ngIf="card?.salaryPeriodType"> 
+        ₹ {{card?.salaryFrom}} - {{card?.salaryTo}} | {{ getSalaryPeriod(card?.salaryPeriodType)}}</mat-card-title>
       <mat-card-content class="description">
         <p style="margin: 0">{{ card?.title }}</p>
         <p *ngIf="card?.year">

@@ -215,21 +215,96 @@
             <a class="dropdown-toggle">Jobs</a>
           </div>
           <ul class="dropdown-menu">
-            <li><a>Data Entry & Back Office</a></li>
-            <li><a>Sales & Marketting</a></li>
-            <li><a>BPO & Telecaller</a></li>
-            <li><a>Driver</a></li>
-            <li><a>Office Assistant</a></li>
-            <li><a>Delivery & Collection</a></li>
-            <li><a>Teacher</a></li>
-            <li><a>Cook</a></li>
-            <li><a>Receptionist & Front Office</a></li>
-            <li><a>Operator & Technician</a></li>
-            <li><a>IT & Software</a></li>
-            <li><a>Hotel & Travel</a></li>
-            <li><a>Accountant</a></li>
-            <li><a>Designer</a></li>
-            <li><a>Other Jobs</a></li>
+            <li>
+              <a [routerLink]="'/Jobs/view-posts'" [queryParams]="{
+                  type: 'job',
+                  sub: jobTypes.DataEntryAndBackOffice
+                }">Data Entry & Back Office</a>
+            </li>
+            <li>
+              <a [routerLink]="'/Jobs/view-posts'" [queryParams]="{
+                  type: 'job',
+                  sub: jobTypes.MediaEntertainment
+                }">Media & Entertainment</a>
+            </li>
+            <li>
+              <a [routerLink]="'/Jobs/view-posts'" [queryParams]="{
+                  type: 'job',
+                  sub: jobTypes.SalesAndMarketting
+                }">Sales & Marketting</a>
+            </li>
+            <li>
+              <a [routerLink]="'/Jobs/view-posts'" [queryParams]="{
+                  type: 'job',
+                  sub: jobTypes.BPOAndTelecaller
+                }">BPO & Telecaller</a>
+            </li>
+            <li>
+              <a [routerLink]="'/Jobs/view-posts'" [queryParams]="{
+                  type: 'job',
+                  sub: jobTypes.OfficeAssistant
+                }">Office Assistant</a>
+            </li>
+            <li>
+              <a [routerLink]="'/Jobs/view-posts'" [queryParams]="{
+                  type: 'job',
+                  sub: jobTypes.OfficeAssistant
+                }">Office Assistant</a>
+            </li>
+            <li>
+              <a [routerLink]="'/Jobs/view-posts'" [queryParams]="{
+                  type: 'job',
+                  sub: jobTypes.DeliveryAndCollection
+                }">Delivery & Collection</a>
+            </li>
+            <li>
+              <a [routerLink]="'/Jobs/view-posts'" [queryParams]="{
+                  type: 'job',
+                  sub: jobTypes.TeacherAndTrainer
+                }">Teacher</a>
+            </li>
+            <li>
+              <a [routerLink]="'/Jobs/view-posts'" [queryParams]="{
+                  type: 'job',
+                  sub: jobTypes.CookAndDriverAndSecurity
+                }">Cook,driver & security</a>
+            </li>
+            <li>
+              <a [routerLink]="'/Jobs/view-posts'" [queryParams]="{
+                  type: 'job',
+                  sub: jobTypes.ReceptionistAndFrontOffice
+                }">Receptionist & Front Office</a>
+            </li>
+            <li>
+              <a [routerLink]="'/Jobs/view-posts'" [queryParams]="{
+                  type: 'job',
+                  sub: jobTypes.OperatorAndTechnician
+                }">Operator & Technician</a>
+            </li>
+            <li>
+              <a [routerLink]="'/Jobs/view-posts'" [queryParams]="{
+                  type: 'job',
+                  sub: jobTypes.ITAndSoftware
+                }">IT & Software</a>
+            </li>
+            <li>
+              <a [routerLink]="'/Jobs/view-posts'" [queryParams]="{
+                  type: 'job',
+                  sub: jobTypes.HotelAndTravel
+                }">Hotel & Travel</a>
+            </li>
+            <li>
+              <a [routerLink]="'/Jobs/view-posts'" [queryParams]="{
+                  type: 'job',
+                  sub: jobTypes.FinanceAndAccounting
+                }">Accountant</a>
+            </li>
+            <li>
+              <a [routerLink]="'/Jobs/view-posts'" [queryParams]="{
+                  type: 'job',
+                  sub: jobTypes.Others
+                }">Other Jobs</a>
+            </li>
           </ul>
         </li>
         <li class="dropdown auto-pointer-events">
