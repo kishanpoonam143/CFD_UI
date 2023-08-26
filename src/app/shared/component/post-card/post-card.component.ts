@@ -3,6 +3,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { CommonService } from '../../service/common.service';
+import { SalaryPeriod } from '../../enum/SalaryPeriod';
 
 @Component({
     selector: 'app-post-card',
@@ -28,6 +29,11 @@ export class PostCardComponent implements OnInit {
     displayedCardCount: number = 16;
 
     isScrolledDown = false;
+
+    salaryPeriods = Object.keys(SalaryPeriod).map((key: any) => ({
+        label: key,
+        id: SalaryPeriod[key],
+      }));
 
     scrollToTop() {
         const scrollDuration = 300; // Duration of the scroll animation in milliseconds
@@ -138,5 +144,11 @@ export class PostCardComponent implements OnInit {
                 }
             }
         }
+    }
+    getSalaryPeriod(id: number) {
+        let selectedSalaryPeriod = this.salaryPeriods.filter(salaryPeriod => Number(salaryPeriod.id) == id);
+        if (selectedSalaryPeriod.length > 0)
+            return selectedSalaryPeriod[0].label;
+        return "";
     }
 }

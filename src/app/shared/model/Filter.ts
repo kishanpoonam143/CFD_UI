@@ -24,4 +24,7 @@ export class Filter{
     superBuildUpArea : number[] | null = null;
     plotArea : number[] | null = null;
     bachelorAllowed : boolean | null = null;
+
+    salaryPeriodType : number[] | null = null;
+    positionType : number[] | null = null;
 }
