@@ -129,6 +129,8 @@ export class PostCardComponent implements OnInit {
             return card.propertyImageList[0]?.imageURL;
         }else if (card.jobImageList && card.jobImageList[0]?.imageURL) {
             return card.jobImageList[0]?.imageURL;
+        }else if (card.commercialServiceImagesList && card.commercialServiceImagesList[0]?.imageURL) {
+            return card.commercialServiceImagesList[0]?.imageURL;
         }
         else {
             return '../../../assets/image_not_available.png';
