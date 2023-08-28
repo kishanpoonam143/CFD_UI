@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'Books', loadChildren: () => import('./modules/book/book.module').then(m => m.BookModule) },
   { path: 'Properties', loadChildren: () => import('./modules/property/property.module').then(m => m.PropertyModule) },
   { path: 'Jobs', loadChildren: () => import('./modules/job/job.module').then(m => m.JobModule) },
+  { path: 'Commercial Services', loadChildren: () => import('./modules/commercial-service/commercial-service.module').then(m => m.CommercialServiceModule) },
   { path : '', component : DashboardComponent},
   { path : 'post-menu', component : PostMenuComponent,canActivate: [AuthGuard]}
 

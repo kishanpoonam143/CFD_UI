@@ -15,6 +15,7 @@ import { FashionType } from '../../enum/FashionType';
 import { BookType } from '../../enum/BookType';
 import { PropertyType } from '../../enum/PropertyType';
 import { JobType } from '../../enum/JobType';
+import { CommercialServiceType } from '../../enum/CommercialServiceType';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -33,6 +34,7 @@ export class HeaderComponent implements OnInit {
   bookTypes = BookType;
   propertyTypes = PropertyType;
   jobTypes = JobType;
+  commercialServicTypes = CommercialServiceType;
   isUserLogedIn: boolean = false;
   userData: any;
   imageUrl: string = "https://icon-library.com/images/default-profile-icon/default-profile-icon-24.jpg";
