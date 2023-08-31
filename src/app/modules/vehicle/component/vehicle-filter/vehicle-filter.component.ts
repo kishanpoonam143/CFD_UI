@@ -77,6 +77,7 @@ export class VehicleFilterComponent {
     this.route.queryParams.subscribe(params => {
       this.subCategory = params['sub'];
       this.mainCategory = params['type'];
+      if(this.subCategory !=undefined)
       this.filterObj.subCategoryId = Number(this.subCategory);
       switch (this.subCategory) {
         case "4": {

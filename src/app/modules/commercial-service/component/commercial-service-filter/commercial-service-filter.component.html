@@ -113,7 +113,7 @@
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
-    <div class="example-label-container">
+    <div class="example-label-container" *ngIf="subCategory !=undefined">
       <label id="example-name-label" class="example-name-label">Price</label>
       <div class="pd-5">
         <label class="example-value-label">{{
@@ -124,7 +124,7 @@
         }}</label>
       </div>
     </div>
-    <div style="display: flex">
+    <div style="display: flex"  *ngIf="subCategory !=undefined">
       <mat-slider
         class="example-margin"
         min="0"

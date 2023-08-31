@@ -49,6 +49,8 @@ export class CommercialServiceFilterComponent {
       this.getAllStates();
     });
     this.route.queryParams.subscribe((params: any) => {
+      this.subCategory = params.sub;
+      if(this.subCategory !=undefined)
       this.filterObj.subCategoryId = Number(params.sub);
     });
   }

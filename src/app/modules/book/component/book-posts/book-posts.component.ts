@@ -33,11 +33,21 @@ export class BookPostsComponent {
   }
   getPosts() {
     this.cards = [];
-    this.bookService.getAllBookPosts().subscribe((data: any) => {
-      this.actualCards = data;
-      this.cards = this.actualCards.filter((card: any) => card.subCategoryId == this.subCategoryId);
-      this.isLoading = false;
-    })
+    if (this.subCategoryId) {
+      this.bookService.getAllBookPosts().subscribe((data: any) => {
+        this.actualCards = data;
+        this.cards = this.actualCards.filter((card: any) => card.subCategoryId == this.subCategoryId);
+        this.isLoading = false;
+      })
+    }
+    else if (this.category === 'Book') {
+      // Show all posts within the "Book" category
+      this.bookService.getAllBookPosts().subscribe((data: any) => {
+        this.actualCards = data;
+        this.cards = this.actualCards;
+        this.isLoading = false;
+      })
+    }
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();

@@ -23,7 +23,8 @@ export class CommercialServicePostsComponent {
     this.route.queryParams.subscribe(params => {
       this.isLoading = true;
       this.category = params['type'];
-      this.subCategoryId = Number(params['sub']);
+      if (params['sub'] != undefined)
+        this.subCategoryId = Number(params['sub']);
       this.getPosts();
     });
     this.subscription = this.commonService.getData().subscribe((data: any) => {
@@ -35,7 +36,10 @@ export class CommercialServicePostsComponent {
     this.cards = [];
     this.commercialService.getAllCommercialServicePosts().subscribe((data: any) => {
       this.actualCards = data;
-      this.cards = this.actualCards.filter((card: any) => card.subCategoryId == this.subCategoryId);
+      if (this.subCategoryId != 0)
+        this.cards = this.actualCards.filter((card: any) => card.subCategoryId == this.subCategoryId);
+      else
+        this.cards = data;
       this.isLoading = false;
     })
   }

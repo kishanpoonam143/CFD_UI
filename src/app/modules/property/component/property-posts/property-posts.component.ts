@@ -23,7 +23,8 @@ export class PropertyPostsComponent {
     this.route.queryParams.subscribe(params => {
       this.isLoading = true;
       this.category = params['type'];
-      this.subCategoryId = Number(params['sub']);
+      if (params['sub'] != undefined)
+        this.subCategoryId = Number(params['sub']);
       this.getPosts();
     });
     this.subscription = this.commonService.getData().subscribe((data: any) => {
@@ -35,7 +36,10 @@ export class PropertyPostsComponent {
     this.cards = [];
     this.propertyService.getAllPropertyPosts().subscribe((data: any) => {
       this.actualCards = data;
-      this.cards = this.actualCards.filter((card: any) => card.subCategoryId == this.subCategoryId);
+      if (this.subCategoryId != 0)
+        this.cards = this.actualCards.filter((card: any) => card.subCategoryId == this.subCategoryId);
+      else
+        this.cards = data;
       this.isLoading = false;
     })
   }
@@ -46,9 +50,9 @@ export class PropertyPostsComponent {
     const filterObj: { [key: string]: { operator: string; value: any } } = {};
     Object.keys(data).forEach(key => {
       if (data[key] != null && data[key] != "") {
-        if (key == 'price' || key== 'superBuildUpArea' || key== 'plotArea')
+        if (key == 'price' || key == 'superBuildUpArea' || key == 'plotArea')
           filterObj[key] = { operator: 'between', value: data[key] }
-        else if (key == 'state' || key == 'subCategoryId' || key == 'city' || key == 'nearBy' || key=='bedrooms' || key=='bathrooms' || key=='bachelorAllowed')
+        else if (key == 'state' || key == 'subCategoryId' || key == 'city' || key == 'nearBy' || key == 'bedrooms' || key == 'bathrooms' || key == 'bachelorAllowed')
           filterObj[key] = { operator: '==', value: data[key] };
         else
           filterObj[key] = { operator: 'includes', value: data[key] };
