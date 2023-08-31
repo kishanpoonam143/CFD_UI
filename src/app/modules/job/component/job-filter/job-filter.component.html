@@ -115,7 +115,7 @@
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
-    <mat-form-field appearance="fill" class="form-field-w-100">
+    <mat-form-field appearance="fill" class="form-field-w-100" *ngIf="subCategory !=undefined">
         <mat-label>Salary period</mat-label>
         <mat-select
           #salaryPeriodMultiSelect
@@ -128,7 +128,7 @@
           }}</mat-option>
         </mat-select>
     </mat-form-field>
-    <mat-form-field appearance="fill" class="form-field-w-100">
+    <mat-form-field appearance="fill" class="form-field-w-100" *ngIf="subCategory !=undefined">
         <mat-label>Position Type</mat-label>
         <mat-select
           #positionTypeMultiSelect

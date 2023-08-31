@@ -49,6 +49,8 @@ export class FurnitureFilterComponent {
       this.getAllStates();
     });
     this.route.queryParams.subscribe((params: any) => {
+      this.subCategory = params.sub;
+      if(params.sub !=undefined)
       this.filterObj.subCategoryId = Number(params.sub);
     });
   }

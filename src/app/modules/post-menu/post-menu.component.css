@@ -85,7 +85,7 @@
 }
 
 .sub-cat {
-    position: absolute;
+    /* position: absolute; */
     right: 0 !important;
     border-right: none !important;
 }

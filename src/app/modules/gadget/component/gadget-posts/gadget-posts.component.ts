@@ -46,8 +46,8 @@ export class GadgetPostsComponent {
       this.gadgetService.getAllGadgetPosts().subscribe((data: any) => {
         this.actualCards = data;
         this.cards = this.actualCards;
+        this.isLoading = false;
       })
-      this.isLoading = false;
     }
   }
   ngOnDestroy() {

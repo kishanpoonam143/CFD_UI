@@ -56,6 +56,7 @@ export class GadgetFilterComponent {
     this.route.queryParams.subscribe((params: any) => {
       this.subCategory = params.sub;
       this.mainCategory = params.type;
+      if(this.subCategory !=undefined)
       this.filterObj.subCategoryId = Number(params.sub);
       switch (this.subCategory) {
         case "1": {

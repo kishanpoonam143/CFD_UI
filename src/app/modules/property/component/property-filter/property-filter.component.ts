@@ -68,7 +68,7 @@ export class PropertyFilterComponent {
   selectedServiceType: any;
   selectedBathRoomNumber: any;
   selectedBedRoomNumber: any;
-  selectedBachelorsAllowed : any;
+  selectedBachelorsAllowed: any;
   numberOfBedRooms = [1, 2, 3, 4];
   numberOfBathRooms = [1, 2, 3, 4];
   houseTypes = Object.keys(HouseType).map((key: any) => ({
@@ -122,7 +122,24 @@ export class PropertyFilterComponent {
       this.getAllStates();
     });
     this.route.queryParams.subscribe((params: any) => {
-      this.filterObj.subCategoryId = Number(params.sub);
+      this.subCategory = params.sub;
+      if (this.subCategory != undefined) {
+        this.filterObj.subCategoryId = Number(params.sub);
+        this.houseApartmentsSale = ['houseType', 'bedrooms', 'bathrooms', 'furnishing', 'constructionStatus', 'listedBy', 'superBuildUpArea', 'projectName'];
+        this.houseApartmentsRent = ['houseType', 'bedrooms', 'bathrooms', 'furnishing', 'constructionStatus', 'listedBy', 'superBuildUpArea', 'bachelorAllowed',];
+        this.landsAndPlots = ['serviceType', 'listedBy', 'plotArea'];
+        this.shopsAndOfcRent = ['furnishing', 'listedBy', 'superBuildUpArea'];
+        this.shopsAndOfcSale = ['furnishing', 'constructionStatus', 'listedBy', 'superBuildUpArea'];
+        this.pgAndGuestHouses = ['subType', 'furnishing', 'listedBy'];
+      }
+      else {
+        this.houseApartmentsSale = [];
+        this.houseApartmentsRent = [];
+        this.landsAndPlots = [];
+        this.shopsAndOfcRent = [];
+        this.shopsAndOfcSale = [];
+        this.pgAndGuestHouses = [];
+      }
       this.selectRequiredFilters();
     });
   }
@@ -405,7 +422,7 @@ export class PropertyFilterComponent {
     this.commonService.setData(this.filterObj);
     this.filtersSelected = true;
   }
-  onBedBachelorsAllowedSelect(event:any){
+  onBedBachelorsAllowedSelect(event: any) {
     this.filterObj.bachelorAllowed = event.value.value;
     this.commonService.setData(this.filterObj);
     this.updateAppliedFilters("bachelorAllowed", event.value.label);
@@ -519,7 +536,7 @@ export class PropertyFilterComponent {
     this.toPlotArea = 0;
     this.filterObj.plotArea = null;
   }
-  resetBachelorAllowed(){
+  resetBachelorAllowed() {
     this.filterObj.bachelorAllowed = null;
     this.selectedBachelorsAllowed = null;
   }
